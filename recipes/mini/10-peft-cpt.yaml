@@ -1,0 +1,40 @@
+schema_version: "1.0"
+experiment_id: mini-cpt-finemath-5m-qwen3-0.6b-v1
+run_label: mini-cpt-finemath-5m-s42
+stage: peft_cpt
+model_config: configs/model/qwen3-0.6b-base.yaml
+parent_model_id: Qwen/Qwen3-0.6B-Base@da87bfb608c14b7cf20ba1ce41287e8de496c0cd
+dataset:
+  dataset_id: ds-finemath-cpt-becef05166edaa7b1fa58a0ff38eabccf4384ac587ef7e85d22b62ab6ffb0b01
+  manifest: data/processed/mini/2026-10-17-build-02/finemath/manifests/cpt-smoke-v1.yaml
+  canonical: data/processed/mini/2026-10-17-build-02/finemath/canonical/cpt_train.jsonl
+  native: data/processed/mini/2026-10-19-mini-sft-2048-pilot/finemath-cpt-native/cpt_train.jsonl
+  quality_review: data/processed/mini/2026-10-17-build-02/reports/mini-quality-reviews/remediation-v1/reviews/finemath-cpt_train.json
+  expected_budget_count: 5000368
+  expected_budget_unit: tokens
+  usage: exploratory
+  reason: dataset quality review is pending and usage is legacy_unknown
+seed: 42
+training:
+  tuner_type: lora
+  torch_dtype: float16
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 8
+  learning_rate: 0.0001
+  lora_rank: 8
+  lora_alpha: 32
+  target_modules: all-linear
+  gradient_checkpointing: true
+  max_length: 1024
+  num_train_epochs: 1
+  warmup_ratio: 0.05
+  weight_decay: 0.0
+  max_grad_norm: 1.0
+  logging_steps: 10
+  save_steps: 100
+  save_total_limit: 2
+  split_dataset_ratio: 0
+  dataset_num_proc: 1
+  dataloader_num_workers: 0
+  save_only_model: false
+  use_hf: true

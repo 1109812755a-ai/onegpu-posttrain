@@ -1,0 +1,7 @@
+protocol_id: sft-math-candidate
+version: v1
+response_format: json_object
+required_fields:
+  - problem_id
+  - solution
+  - final_answer

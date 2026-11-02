@@ -1,0 +1,8 @@
+profile_id: fake-local
+adapter: fake
+model: fixture-responder-v1
+supported_parameters:
+  - temperature
+  - max_output_tokens
+supports_json_object: true
+revision: fixture-v1

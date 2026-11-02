@@ -1,0 +1,5 @@
+run_label: mini-alignment-shared-eval-s42
+stage: exploratory_alignment
+model_config: configs/model/qwen3-0.6b-base.yaml
+evaluation_config: configs/evaluation/math-v1.yaml
+seed: 42

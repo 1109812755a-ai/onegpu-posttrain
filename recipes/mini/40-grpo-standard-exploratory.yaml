@@ -1,0 +1,52 @@
+experiment_id: mini-alignment-existing-data-v1
+run_label: mini-grpo-standard-existing-2000-s42
+stage: grpo
+profile: standard
+usage: exploratory
+parent: runs/mini/sft-deepmath-1024-subset-full-v1/merged/M2-SFT
+seed: 42
+dataset:
+  path: data/processed/mini/2026-10-17-build-02/openr1/canonical/grpo.jsonl
+  manifest: data/processed/mini/2026-10-17-build-02/openr1/manifests/grpo-smoke-v1.yaml
+  actual_records: 2000
+  unit: prompts
+  quality_report: data/processed/mini/2026-10-17-build-02/openr1/reports/quality/grpo.json
+  quality_status: NOT_EVALUATED
+training:
+  tuner_type: lora
+  torch_dtype: float16
+  learning_rate: 1.0e-5
+  lora_rank: 8
+  lora_alpha: 32
+  target_modules: all-linear
+  gradient_checkpointing: true
+  beta: 0.04
+  reference_enabled: true
+  use_vllm: false
+  num_generations: 2
+  generation_batch_size_completions: 4
+  per_device_train_batch_size_completions: 1
+  gradient_accumulation_steps: 4
+  enforce_equal_effective_generation_batch: true
+  max_prompt_length_candidate: 512
+  max_completion_length_candidate: 512
+  truncation_strategy: delete
+  temperature: 1.0
+  top_p: 1.0
+  num_iterations: 1
+  loss_type: grpo
+  max_steps: 3
+  warmup_ratio: 0.0
+  logging_steps: 1
+  save_steps: 3
+  save_total_limit: 1
+  split_dataset_ratio: 0
+  dataset_num_proc: 1
+  dataloader_num_workers: 0
+  use_hf: true
+  log_completions: true
+  budget_type: completions
+  seed: 42
+reward:
+  accuracy: 1.0
+  format: 0.1

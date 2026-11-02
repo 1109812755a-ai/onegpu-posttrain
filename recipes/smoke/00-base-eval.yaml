@@ -1,0 +1,5 @@
+run_label: base-smoke-s42
+stage: base_eval
+model_config: configs/model/qwen3-0.6b-base.yaml
+evaluation_config: configs/evaluation/math-v1.yaml
+seed: 42

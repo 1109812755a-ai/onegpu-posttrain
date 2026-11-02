@@ -1,0 +1,30 @@
+matrix_protocol: unified-model-evaluation-matrix-v1
+expected_protocol_version: math-eval-v1
+baseline_model_id: M2-SFT
+expected_metrics:
+  - gsm8k
+  - math_500
+  - internal_acc
+  - domain_ppl
+limits:
+  gsm8k: 2
+  math_500_per_level: 2
+  math_500_total: 10
+  internal_holdout: 5
+  domain_ppl: 5
+models:
+  - model_id: M2-SFT
+    model_path: runs/mini/sft-deepmath-1024-subset-full-v1/merged/M2-SFT
+    eval_path: runs/mini/alignment-existing-data-v1/evaluation/M2-SFT/eval.json
+  - model_id: M3-DPO
+    model_path: runs/mini/alignment-existing-data-v1/dpo/merged/M3-DPO
+    eval_path: runs/mini/alignment-existing-data-v1/evaluation/M3-DPO/eval.json
+  - model_id: M3-SimPO
+    model_path: runs/mini/alignment-existing-data-v1/simpo/merged/M3-SimPO
+    eval_path: runs/mini/alignment-existing-data-v1/evaluation/M3-SimPO/eval.json
+  - model_id: M3-GRPO-standard
+    model_path: runs/mini/alignment-existing-data-v1/grpo-standard/merged/M3-GRPO-standard
+    eval_path: runs/e/grpo-s/eval.json
+  - model_id: M3-GRPO-lowmem
+    model_path: runs/mini/alignment-existing-data-v1/grpo-lowmem/merged/M3-GRPO-lowmem
+    eval_path: runs/e/grpo-l/eval.json

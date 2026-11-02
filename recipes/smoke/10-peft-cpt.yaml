@@ -1,0 +1,38 @@
+run_label: cpt-peft-smoke-s42
+stage: peft_cpt
+model_config: configs/model/qwen3-0.6b-base.yaml
+seed: 42
+
+# Smoke validates feasibility and stage plumbing, not the 500K-token final effect size.
+# The data artifact can contain ~500K tokens, while max_steps deliberately consumes
+# only a subset so the first RTX 4060 run is cheap and debuggable.
+training:
+  tuner_type: lora
+  torch_dtype: float16
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 8
+  learning_rate: 0.0001
+  lora_rank: 8
+  lora_alpha: 32
+  target_modules: all-linear
+  gradient_checkpointing: true
+  max_length: 1024
+  max_steps: 20
+  warmup_ratio: 0.05
+  weight_decay: 0.0
+  max_grad_norm: 1.0
+  logging_steps: 1
+  save_steps: 10
+  save_total_limit: 2
+  split_dataset_ratio: 0
+  dataset_num_proc: 1
+  dataloader_num_workers: 0
+  save_only_model: false
+  use_hf: true
+
+# Optional low-memory override for later troubleshooting, not the default smoke path:
+# quant_method: bnb
+# quant_bits: 4
+# bnb_4bit_compute_dtype: float16
+# bnb_4bit_quant_type: nf4
+# bnb_4bit_use_double_quant: true

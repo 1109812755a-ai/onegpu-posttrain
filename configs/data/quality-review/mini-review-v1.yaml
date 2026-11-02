@@ -1,0 +1,125 @@
+schema_version: '1.0'
+profile_id: mini-stage-quality-review
+profile_version: '1'
+description: >-
+  Conservative stage-specific review profile. Structural invariants can be checked
+  automatically; semantic and verifier evidence requires explicit coverage and review.
+stages:
+  cpt:
+    checks:
+      - check_id: canonical_schema
+        metric_id: schema_valid_rate
+        method: canonical_schema:v1
+        minimum: 1.0
+      - check_id: unique_record_ids
+        metric_id: duplicate_record_ids
+        method: exact_record_id:v1
+        maximum: 0
+      - check_id: independent_semantic_review
+        metric_id: semantic_correctness
+        method: manual_review
+        unsupported_action: pending
+  cpt_holdout:
+    checks:
+      - check_id: canonical_schema
+        metric_id: schema_valid_rate
+        method: canonical_schema:v1
+        minimum: 1.0
+      - check_id: unique_record_ids
+        metric_id: duplicate_record_ids
+        method: exact_record_id:v1
+        maximum: 0
+      - check_id: independent_semantic_review
+        metric_id: semantic_correctness
+        method: manual_review
+        unsupported_action: pending
+  sft:
+    checks:
+      - check_id: canonical_schema
+        metric_id: schema_valid_rate
+        method: canonical_schema:v1
+        minimum: 1.0
+      - check_id: unique_record_ids
+        metric_id: duplicate_record_ids
+        method: exact_record_id:v1
+        maximum: 0
+      - check_id: independent_semantic_correctness
+        metric_id: semantic_correctness
+        method: reference_answer_verification
+        requirement: diagnostic
+        unsupported_action: pending
+      - check_id: human_reasoning_review
+        method: manual_review
+        unsupported_action: pending
+  preference:
+    checks:
+      - check_id: canonical_schema
+        metric_id: schema_valid_rate
+        method: canonical_schema:v1
+        minimum: 1.0
+      - check_id: unique_record_ids
+        metric_id: duplicate_record_ids
+        method: exact_record_id:v1
+        maximum: 0
+      - check_id: independent_pair_ordering
+        metric_id: semantic_correctness
+        method: verify_chosen_and_rejected_references
+        requirement: diagnostic
+        unsupported_action: pending
+      - check_id: human_pair_review
+        method: manual_review
+        unsupported_action: pending
+  preference_eval:
+    checks:
+      - check_id: canonical_schema
+        metric_id: schema_valid_rate
+        method: canonical_schema:v1
+        minimum: 1.0
+      - check_id: unique_record_ids
+        metric_id: duplicate_record_ids
+        method: exact_record_id:v1
+        maximum: 0
+      - check_id: independent_pair_ordering
+        metric_id: semantic_correctness
+        method: verify_chosen_and_rejected_references
+        requirement: diagnostic
+        unsupported_action: pending
+      - check_id: human_pair_review
+        method: manual_review
+        unsupported_action: pending
+  grpo:
+    checks:
+      - check_id: canonical_schema
+        metric_id: schema_valid_rate
+        method: canonical_schema:v1
+        minimum: 1.0
+      - check_id: unique_record_ids
+        metric_id: duplicate_record_ids
+        method: exact_record_id:v1
+        maximum: 0
+      - check_id: verifier_support_review
+        metric_id: verifier_support_coverage
+        method: declared_reward_verifier_support
+        requirement: diagnostic
+        unsupported_action: pending
+      - check_id: reward_semantics_review
+        method: manual_review
+        unsupported_action: pending
+  eval:
+    checks:
+      - check_id: canonical_schema
+        metric_id: schema_valid_rate
+        method: canonical_schema:v1
+        minimum: 1.0
+      - check_id: unique_record_ids
+        metric_id: duplicate_record_ids
+        method: exact_record_id:v1
+        maximum: 0
+      - check_id: scoring_protocol_review
+        metric_id: scoring_coverage
+        method: declared_evaluation_protocol
+        requirement: diagnostic
+        unsupported_action: pending
+      - check_id: evaluation_semantics_review
+        method: manual_review
+        unsupported_action: pending

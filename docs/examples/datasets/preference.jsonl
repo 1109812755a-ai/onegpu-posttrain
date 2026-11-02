@@ -1,0 +1,1 @@
+{"id":"preference-example-001","raw_problem":"What is 7 × 8?","prompt":[{"role":"user","content":"What is 7 × 8?"}],"chosen":"56","rejected":"54","prompt_template_id":"chat-v1","metadata":{"ordering_evidence_status":"example_only"}}

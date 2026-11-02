@@ -1,0 +1,5 @@
+run_label: mini-sft-math-eval-v1
+stage: sft_eval
+model_config: configs/model/qwen3-0.6b-base.yaml
+evaluation_config: configs/evaluation/math-v1-launcher-mini.yaml
+seed: 42

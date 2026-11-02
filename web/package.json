@@ -1,0 +1,29 @@
+{
+  "name": "onegpu-posttrain-data-ui",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc --noEmit && vite build",
+    "test:dataset-mixture": "vitest run --config vitest.config.ts",
+    "test:policy-editor": "node --test tests/policyPreview.test.mjs",
+    "test:dataset-preview": "node --test tests/datasetPreview.test.mjs",
+    "preview": "vite preview --host 127.0.0.1"
+  },
+  "dependencies": {
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.8",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "jsdom": "^27.4.0",
+    "prettier": "3.9.10",
+    "typescript": "7.0.2",
+    "vite": "8.3.4",
+    "vitest": "^4.1.12"
+  }
+}

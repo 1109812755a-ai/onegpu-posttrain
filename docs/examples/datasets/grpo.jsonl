@@ -1,0 +1,1 @@
+{"id":"grpo-example-001","raw_problem":"What is 7 × 8?","prompt":[{"role":"user","content":"What is 7 × 8?"}],"answer":"56","prompt_template_id":"chat-v1","metadata":{"reward_verifier_status":"not_provided"}}

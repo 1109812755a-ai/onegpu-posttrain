@@ -1,0 +1,40 @@
+schema_version: "1.0"
+experiment_id: mini-sft-deepmath-1536-s42-pilot-v1
+run_label: mini-sft-deepmath-1536-probe-s42
+stage: sft
+parent_model_id: run-m1-cpt-merge-d679a3f662ff
+dataset:
+  dataset_key: deepmath.sft_calibration_1536
+  dataset_id: ds-sft-length-1536-3ec52e468676-42-exact
+  manifest: artifacts/calibrations/sft-length/deepmath-full-sft-exact-20261019-s42/length-1536/manifest.json
+  canonical: artifacts/calibrations/sft-length/deepmath-full-sft-exact-20261019-s42/length-1536/canonical/sft.jsonl
+  native: artifacts/calibrations/sft-length/deepmath-full-sft-exact-20261019-s42/length-1536/native/sft.jsonl
+  expected_count: 4820
+  expected_budget_unit: examples
+  usage: exploratory
+  reason: calibration candidate; exact answer agreement does not establish reasoning quality
+seed: 42
+training:
+  tuner_type: lora
+  torch_dtype: float16
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 8
+  learning_rate: 0.0001
+  lora_rank: 8
+  lora_alpha: 32
+  target_modules: all-linear
+  gradient_checkpointing: true
+  max_length: 1536
+  max_steps: 3
+  warmup_ratio: 0.05
+  weight_decay: 0.0
+  max_grad_norm: 1.0
+  logging_steps: 1
+  save_steps: 3
+  save_total_limit: 1
+  split_dataset_ratio: 0
+  dataset_num_proc: 1
+  dataloader_num_workers: 0
+  save_only_model: true
+  use_hf: true
+  report_to: none

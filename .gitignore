@@ -1,0 +1,40 @@
+.venv/
+.cache/
+.idea/
+.onegpu-posttrain/
+__pycache__/
+.pytest_cache/
+.pytest-tmp*/
+.tmp-pytest*/
+.ruff_cache/
+pytest-debug/
+tmp/
+*.pyc
+*.pyo
+*.egg-info/
+build/
+dist/
+node_modules/
+web/.vite/
+.coverage
+htmlcov/
+.DS_Store
+
+# Generated data / runs / weights
+data/raw/
+data/processed/
+data/generated/*.jsonl
+artifacts/
+runs/
+checkpoints/
+*.safetensors
+wandb/
+
+# Local secrets / environment overrides
+.env
+.env.*
+!.env.example
+configs/synthetic/local/
+
+# Agent product proposal is reserved for a later public release.
+openspec/changes/workspace-experiment-agent/

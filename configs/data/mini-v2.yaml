@@ -1,0 +1,96 @@
+schema_version: "1.0"
+profile_id: mini-data-readiness
+profile_version: "2"
+description: >-
+  Mini readiness with source-specific SFT cohorts. OpenR1 and DeepMath are never
+  implicitly combined; DeepMath is the selected 5K pilot cohort, while OpenR1
+  remains independently visible for historical comparison.
+datasets:
+  - dataset_key: finemath.cpt_train
+    stage: cpt
+    required: true
+    budget_required: true
+    target: 5000000
+    unit: tokens
+    count_source: processing_report.outputs.cpt.budget_count
+    manifest_path: 2026-10-17-build-02/finemath/manifests/cpt-smoke-v1.yaml
+    quality_report_required: true
+    processing_report_required: true
+    complete_lineage_required: true
+  - dataset_key: finemath.cpt_holdout
+    stage: cpt_holdout
+    required: true
+    budget_required: false
+    target: null
+    unit: tokens
+    count_source: processing_report.outputs.cpt_holdout.budget_count
+    manifest_path: 2026-10-17-build-02/finemath/manifests/cpt_holdout-smoke-v1.yaml
+    quality_report_required: true
+    processing_report_required: true
+    complete_lineage_required: true
+  - dataset_key: openr1.sft_train
+    stage: sft
+    required: false
+    budget_required: false
+    target: null
+    unit: examples
+    count_source: processing_report.outputs.sft.budget_count
+    manifest_path: 2026-10-17-build-02/openr1/manifests/sft-smoke-v1.yaml
+    quality_report_required: true
+    processing_report_required: true
+    complete_lineage_required: true
+  - dataset_key: deepmath.sft_train
+    stage: sft
+    required: true
+    budget_required: true
+    target: 5000
+    unit: examples
+    count_source: processing_report.outputs.sft.budget_count
+    manifest_path: 2026-10-19-mini-sft-2048-pilot/deepmath-sft/manifests/sft-train-v1.yaml
+    quality_report_required: true
+    processing_report_required: true
+    complete_lineage_required: true
+  - dataset_key: openr1.preference_train
+    stage: preference
+    required: true
+    budget_required: true
+    target: 2000
+    unit: preference_pairs
+    count_source: processing_report.outputs.preference.budget_count
+    manifest_path: 2026-10-17-build-02/openr1/manifests/preference-smoke-v1.yaml
+    quality_report_required: true
+    processing_report_required: true
+    complete_lineage_required: true
+  - dataset_key: openr1.preference_eval
+    stage: preference_eval
+    required: true
+    budget_required: false
+    target: null
+    unit: preference_pairs
+    count_source: processing_report.outputs.preference_eval.budget_count
+    manifest_path: 2026-10-17-build-02/openr1/manifests/preference_eval-smoke-v1.yaml
+    quality_report_required: true
+    processing_report_required: true
+    complete_lineage_required: true
+  - dataset_key: openr1.grpo_train
+    stage: grpo
+    required: true
+    budget_required: true
+    target: 2000
+    unit: prompts
+    count_source: processing_report.outputs.grpo.budget_count
+    manifest_path: 2026-10-17-build-02/openr1/manifests/grpo-smoke-v1.yaml
+    quality_report_required: true
+    processing_report_required: true
+    complete_lineage_required: true
+  - dataset_key: openr1.internal_holdout
+    stage: eval
+    required: true
+    budget_required: false
+    target: null
+    unit: examples
+    count_source: processing_report.outputs.eval.budget_count
+    manifest_path: 2026-10-17-build-02/openr1/manifests/eval-smoke-v1.yaml
+    quality_report_required: true
+    processing_report_required: true
+    complete_lineage_required: true

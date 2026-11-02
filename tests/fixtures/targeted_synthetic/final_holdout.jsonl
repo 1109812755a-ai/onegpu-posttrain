@@ -1,0 +1,2 @@
+{"id":"holdout-001","problem_id":"holdout-problem-001","raw_problem":"A museum displays 9 cases with 11 fossils in each case. Count the fossils.","prompt":"Solve the museum display problem.","answer":"99","eval_prompt_version":"fixture-v1","metadata":{"topic":"algebra"}}
+{"id":"holdout-002","problem_id":"holdout-problem-002","raw_problem":"A ferry carries 6 groups of 13 passengers. How many passengers are aboard?","prompt":"Solve the ferry passenger problem.","answer":"78","eval_prompt_version":"fixture-v1","metadata":{"topic":"algebra"}}

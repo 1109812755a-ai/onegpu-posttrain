@@ -1,0 +1,12 @@
+source:
+  repo: open-r1/OpenR1-Math-220k
+  config: default
+  revision: e4e141ec9dea9f8326f4d347be56105859b2bd68
+protocol_versions:
+  normalization: v1
+  decontamination: v1
+  verifiability_gate: v1
+  length_gate: v1
+  split: v1
+prompt_template_id: qwen3-math-v1
+split_seed: 42

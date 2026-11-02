@@ -1,0 +1,40 @@
+run_label: sft-smoke-s42
+stage: sft
+parent: M1-CPT
+seed: 42
+
+data:
+  target_samples: 200
+  source_config: configs/data/openr1.yaml
+  gates:
+    math_verify_correct: true
+    reasoning_complete: true
+    parseable_answer: true
+    no_silent_truncation: true
+
+# Smoke data was already filtered with a 1024-token rendered length gate.
+# Therefore training max_length is fixed to the same contract instead of
+# silently truncating longer samples at train time.
+training:
+  tuner_type: lora
+  torch_dtype: float16
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 8
+  learning_rate: 0.0001
+  lora_rank: 8
+  lora_alpha: 32
+  target_modules: all-linear
+  gradient_checkpointing: true
+  max_length: 1024
+  max_steps: 20
+  warmup_ratio: 0.05
+  weight_decay: 0.0
+  max_grad_norm: 1.0
+  logging_steps: 1
+  save_steps: 10
+  save_total_limit: 2
+  split_dataset_ratio: 0
+  dataset_num_proc: 1
+  dataloader_num_workers: 0
+  save_only_model: false
+  use_hf: true

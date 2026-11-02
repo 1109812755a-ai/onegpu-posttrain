@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use OneGPU-PostTrain in research or teaching, please cite the software repository and the exact release/commit used."
+title: "OneGPU-PostTrain"
+type: software
+version: "0.1.0.dev6"
+license: Apache-2.0
+authors:
+  - family-names: "OneGPU-PostTrain Contributors"
+abstract: "A single-GPU reproducible LLM post-training experiment lab covering PEFT-CPT, SFT, DPO, SimPO and GRPO with unified evaluation and controlled ablations."

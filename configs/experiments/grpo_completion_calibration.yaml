@@ -1,0 +1,10 @@
+experiment_id: exp-grpo-completion-calibration-smoke-s42
+base_recipe: recipes/smoke/41-grpo-lowmem.yaml
+model: runs/smoke/sft-smoke-s42/merged/M2-SFT
+dataset: artifacts/native/ms-swift/smoke/grpo.jsonl
+output_root: runs/dev7/grpo-completion-calibration
+candidate_lengths:
+  - 512
+  - 768
+  - 1024
+  - 1536

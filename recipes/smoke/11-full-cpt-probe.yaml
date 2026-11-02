@@ -1,0 +1,30 @@
+run_label: cpt-full-probe-s42
+stage: full_cpt_probe
+model_config: configs/model/qwen3-0.6b-base.yaml
+seed: 42
+
+# Diagnostic only. PASS and OOM are both valid feasibility outcomes.
+# Smoke deliberately shortens sequence length and optimizer steps to isolate
+# the question: can standard full-parameter AdamW execute at all on 8 GB?
+training:
+  tuner_type: full
+  # Full-parameter FP16 makes the trainable weights themselves FP16, which
+  # Accelerate cannot safely unscale. BF16 avoids GradScaler and is supported
+  # by the target RTX 40-series GPU.
+  torch_dtype: bfloat16
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 1
+  learning_rate: 0.00001
+  optim: adamw_torch
+  gradient_checkpointing: true
+  max_length: 512
+  max_steps: 5
+  warmup_ratio: 0.0
+  logging_steps: 1
+  save_steps: 5
+  save_total_limit: 1
+  split_dataset_ratio: 0
+  dataset_num_proc: 1
+  dataloader_num_workers: 0
+  save_only_model: true
+  use_hf: true

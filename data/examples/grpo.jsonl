@@ -1,0 +1,1 @@
+{"id":"grpo_000001","raw_problem":"If x + 3 = 7, find x.","prompt":[{"role":"user","content":"If x + 3 = 7, find x."}],"answer":"4","prompt_template_id":"qwen3-math-v1","metadata":{"problem_id":"example","verifier":"math_verify","problem_type":"verifiable_math","prompt_tokens":12}}

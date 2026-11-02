@@ -1,0 +1,11 @@
+template_id: sft-math-short-solution
+version: v1
+template: |-
+  Create a concise but complete worked solution for the {topic} problem below.
+  Preserve the original problem identity in the JSON field required by the output protocol.
+
+  Problem:
+  {question}
+allowed_variables:
+  - question
+  - topic

@@ -1,0 +1,39 @@
+experiment_id: mini-alignment-existing-data-v1
+run_label: mini-dpo-existing-4pairs-s42
+stage: dpo
+usage: exploratory
+parent: runs/mini/sft-deepmath-1024-subset-full-v1/merged/M2-SFT
+seed: 42
+dataset:
+  path: data/processed/mini/2026-10-17-build-02/openr1/canonical/preference.jsonl
+  manifest: data/processed/mini/2026-10-17-build-02/openr1/manifests/preference-smoke-v1.yaml
+  actual_records: 4
+  unit: preference_pairs
+  quality_report: data/processed/mini/2026-10-17-build-02/openr1/reports/quality/preference.json
+  quality_status: NOT_EVALUATED
+training:
+  tuner_type: lora
+  torch_dtype: float16
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 1
+  learning_rate: 0.0001
+  lora_rank: 8
+  lora_alpha: 32
+  target_modules: all-linear
+  gradient_checkpointing: true
+  max_length: 1024
+  max_steps: 4
+  warmup_ratio: 0.0
+  weight_decay: 0.0
+  max_grad_norm: 1.0
+  logging_steps: 1
+  save_steps: 4
+  save_total_limit: 1
+  split_dataset_ratio: 0
+  dataset_num_proc: 1
+  dataloader_num_workers: 0
+  use_hf: true
+  beta: 0.1
+  loss_type: sigmoid
+  label_smoothing: 0.0
+  seed: 42

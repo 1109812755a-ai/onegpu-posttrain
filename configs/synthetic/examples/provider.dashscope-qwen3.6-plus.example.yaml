@@ -1,0 +1,13 @@
+profile_id: dashscope-qwen3.6-plus
+adapter: openai_compatible
+endpoint: https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions
+model: qwen3.6-plus
+api_key_env: 
+supported_parameters:
+  - temperature
+  - max_output_tokens
+supports_json_object: true
+# Keep unknown until the provider reports an immutable revision and usage rates are declared.
+revision: null
+input_cost_per_million_tokens: null
+output_cost_per_million_tokens: null

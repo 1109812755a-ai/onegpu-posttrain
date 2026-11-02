@@ -1,0 +1,1 @@
+{"id":"sft-example-001","raw_problem":"What is 7 × 8?","messages":[{"role":"user","content":"What is 7 × 8?"},{"role":"assistant","content":"7 × 8 = 56."}],"prompt_template_id":"chat-v1","metadata":{"topic":"arithmetic"}}

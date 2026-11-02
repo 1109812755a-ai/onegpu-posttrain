@@ -1,0 +1,20 @@
+dataset_id: example-sft-v1
+stage: sft
+source:
+  repo: open-r1/OpenR1-Math-220k
+  config: default
+  revision: EXAMPLE_NOT_OFFICIAL
+tokenizer:
+  repo: Qwen/Qwen3-0.6B-Base
+  revision: EXAMPLE_NOT_OFFICIAL
+prompt_template_id: qwen3-math-v1
+protocol_versions:
+  normalization: v1
+  decontamination: v1
+  verifiability_gate: v1
+  length_gate: v1
+split_seed: 42
+sample_count: 1
+hashes: {}
+metadata:
+  note: schema example only; never use this manifest for official results

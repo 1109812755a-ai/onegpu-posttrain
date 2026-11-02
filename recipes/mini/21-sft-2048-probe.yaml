@@ -1,0 +1,42 @@
+schema_version: "1.0"
+experiment_id: mini-sft-deepmath-5k-2048-qwen3-0.6b-v1
+run_label: mini-sft-deepmath-2048-probe-s42
+stage: sft
+parent_model_id: run-m1-cpt-merge-d679a3f662ff
+parent_model_path: runs/mini/cpt-finemath-5m-s42-v3/merged/M1-CPT
+dataset:
+  dataset_key: deepmath.sft_train
+  dataset_id: ds-deepmath-mini-sft-sft-40828100d3f7f95a250b4830ee51e82de6b0e54fb67302ea8bf1866cca194936
+  manifest: data/processed/mini/2026-10-19-mini-sft-2048-pilot/deepmath-sft/manifests/sft-train-v1.yaml
+  canonical: data/processed/mini/2026-10-19-mini-sft-2048-pilot/deepmath-sft/canonical/sft.jsonl
+  native: data/processed/mini/2026-10-19-mini-sft-2048-pilot/deepmath-sft/native/sft.jsonl
+  expected_count: 5000
+  expected_budget_unit: examples
+  usage: exploratory
+  reason: answer agreement is not a human reasoning-quality approval; review is pending
+seed: 42
+training:
+  tuner_type: lora
+  torch_dtype: float16
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 8
+  learning_rate: 0.0001
+  lora_rank: 8
+  lora_alpha: 32
+  target_modules: all-linear
+  gradient_checkpointing: true
+  max_length: 2048
+  max_steps: 3
+  warmup_ratio: 0.05
+  weight_decay: 0.0
+  max_grad_norm: 1.0
+  logging_steps: 1
+  save_steps: 3
+  save_total_limit: 1
+  split_dataset_ratio: 0
+  dataset_num_proc: 1
+  dataloader_num_workers: 0
+  dataloader_persistent_workers: false
+  save_only_model: true
+  report_to: none
+  use_hf: true

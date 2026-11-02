@@ -1,0 +1,24 @@
+protocol_version: math-eval-v1
+main_metric: accuracy@1
+prompt_version: qwen3-math-eval-v1
+benchmarks:
+  - gsm8k
+  - math_500
+# EvalScope --limit applies per subset, not per whole benchmark. Split the calls
+# to keep the promised ten-example smoke budget and sample all MATH difficulty levels.
+benchmark_execution:
+  - dataset: gsm8k
+    limit: 5
+  - dataset: math_500
+    limit: 1
+    dataset_args:
+      subset_list:
+        - Level 1
+        - Level 2
+        - Level 3
+        - Level 4
+        - Level 5
+generation:
+  do_sample: false
+  temperature: 0.0
+  max_tokens: 512

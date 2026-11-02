@@ -1,0 +1,10 @@
+source:
+  repo: HuggingFaceTB/finemath
+  config: finemath-4plus
+  revision: e92b25a616738fe95dc186b64dfb19f9c8525594
+protocol_versions:
+  document_split: v1
+  contamination_verification: v1
+  chunking: v1
+  record_identity: v2
+split_seed: 42

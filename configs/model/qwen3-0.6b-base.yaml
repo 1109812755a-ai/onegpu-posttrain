@@ -1,0 +1,6 @@
+model:
+  repo: Qwen/Qwen3-0.6B-Base
+  revision: da87bfb608c14b7cf20ba1ce41287e8de496c0cd
+  family: qwen3
+  parameter_scale: 0.6B
+  role: base

@@ -1,0 +1,67 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "onegpu-posttrain"
+version = "0.1.0.dev6"
+description = "Single-GPU reproducible LLM post-training experiments: PEFT-CPT, SFT, DPO, SimPO and GRPO."
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+license = {text = "Apache-2.0"}
+authors = [{name = "OneGPU-PostTrain Contributors"}]
+dependencies = [
+  "pydantic>=2.7,<3",
+  "PyYAML>=6,<7",
+]
+
+[project.optional-dependencies]
+ui = [
+  "fastapi==0.143.3",
+  "uvicorn==0.54.0",
+]
+ui-test = [
+  "fastapi==0.143.3",
+  "uvicorn==0.54.0",
+  "httpx==0.28.1",
+]
+data = [
+  "datasets>=3,<5",
+  "transformers>=4.51,<5",
+]
+train = [
+  "ms-swift==4.5.3",
+  "msgspec==0.22.0",
+  "math-verify[antlr4_13_2]==0.9.0",
+]
+eval = [
+  "evalscope==1.12.0",
+  "math-verify[antlr4_13_2]==0.9.0",
+]
+synthetic = [
+  "httpx>=0.27,<1",
+]
+dev = [
+  "pytest>=8,<9",
+  "ruff>=0.6",
+]
+all = [
+  "datasets>=3,<5",
+  "transformers>=4.51,<5",
+  "ms-swift==4.5.3",
+  "msgspec==0.22.0",
+  "evalscope==1.12.0",
+  "math-verify[antlr4_13_2]==0.9.0",
+  "pytest>=8,<9",
+  "ruff>=0.6",
+]
+
+[project.scripts]
+onegpu-posttrain = "onegpu_posttrain.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/onegpu_posttrain"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

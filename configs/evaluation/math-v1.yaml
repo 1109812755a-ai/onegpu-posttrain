@@ -1,0 +1,16 @@
+protocol_version: math-eval-v1
+main_metric: accuracy@1
+prompt_version: qwen3-math-eval-v1
+benchmarks:
+  - gsm8k
+  - math_500
+generation:
+  do_sample: false
+  temperature: 0.0
+  max_tokens: 512
+custom:
+  - internal_math_holdout
+  - domain_ppl
+  - general_ppl
+  - policy_pair_accuracy
+  - policy_pair_margin

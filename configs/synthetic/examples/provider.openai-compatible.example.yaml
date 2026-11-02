@@ -1,0 +1,14 @@
+profile_id: replace-with-a-local-profile-id
+adapter: openai_compatible
+endpoint: https://api.example.invalid/v1/chat/completions
+model: replace-with-provider-model
+api_key_env: ONEGPU_SYNTHETIC_API_KEY
+supported_parameters:
+  - temperature
+  - max_output_tokens
+supports_json_object: true
+# Replace with a pinned revision if the provider exposes one; otherwise it is unavailable.
+revision: null
+# Optional user-declared rates, USD per million tokens. Missing rates keep cost unknown.
+input_cost_per_million_tokens: null
+output_cost_per_million_tokens: null

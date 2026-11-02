@@ -1,0 +1,15 @@
+title: 项目自有小样本（空格测试 tokenizer，仅用于流程）
+input_scope: raw_source
+input_jsonl: ../../../data/examples/policy/raw.jsonl
+source_repo: onegpu-posttrain/owned-policy-example
+source_revision: v1
+benchmark_jsonl: ../../../data/examples/policy/benchmark.jsonl
+license_status: declared
+license_note: 项目自有教学样例，沿用仓库 Apache-2.0；不代表上游数据许可。
+split:
+  seed: 42
+  sft_weight: 1
+  alignment_weight: 1
+  holdout_weight: 1
+tokenizer:
+  test_only: true

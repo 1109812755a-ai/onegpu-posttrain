@@ -1,0 +1,12 @@
+stage: sft
+title: SFT 基线筛选（项目自有流程样例）
+usage: exploratory
+rules:
+  correctness: filter
+  completeness: filter
+  answer_parse: filter
+resources:
+  max_length: 128
+  target_count: 2
+tokenizer:
+  test_only: true
