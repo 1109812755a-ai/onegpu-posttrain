@@ -41,13 +41,38 @@
 
 因此 OneGPU-PostTrain 的核心不是重写 Trainer，而是：
 
-```text
-原始数据 → 处理与质量评估 → 训练 → 评测 → 受控实验
+```mermaid
+flowchart LR
+  raw["原始数据"] --> process["按训练阶段处理<br/>并检查数据质量"]
+  process --> dataset["带版本的数据集<br/>manifest + 质量报告"]
+  dataset --> preview["预览训练配方<br/>与资源估算"]
+  preview --> train["训练运行"]
+  train --> evaluate["统一协议评测"]
+  evaluate --> compare["受控对比"]
+  compare --> evidence["实验依据报告"]
 ```
 
 **ms-swift 是训练引擎，OneGPU-PostTrain 是实验层。**
 
 数据质量是实验层的一条主线：每个阶段都需要适合该阶段的结构、语义、分布和泄漏证据，不能只有样本数量。数据构建报告记录处理步骤和拒绝原因；数据血缘把质量变化连接到训练 run、模型和评测。只有受控实验才能检验某种清洗策略是否改变模型结果。报告契约和落地顺序见[数据质量设计](docs/design/DATA_QUALITY_DESIGN_zh.md)。
+
+### 从评测结果追溯到实验输入
+
+每个结果都关联到产生它的数据集、配方、随机种子、模型和评测协议：
+
+```mermaid
+flowchart LR
+  dataset["数据集版本"] --> run["训练运行"]
+  recipe["训练配方 + 配置"] --> run
+  seed["随机种子 + 环境"] --> run
+  run --> checkpoint["检查点 / 模型"]
+  run --> trace["运行日志 + 资源指标"]
+  checkpoint --> evaluation["评测运行"]
+  evaldata["评测数据集 + 协议"] --> evaluation
+  evaluation --> result["评测结果"]
+  trace --> comparison["受控对比"]
+  result --> comparison
+```
 
 artifact schema、效果比较类型和分阶段交付方案见[数据处理、质量变化与模型效果详细设计](docs/design/DATA_PROCESSING_EFFECT_DESIGN_zh.md)。
 

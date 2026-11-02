@@ -41,13 +41,38 @@ Training frameworks already know how to run CPT, SFT, DPO, SimPO and GRPO. The m
 
 OneGPU-PostTrain therefore connects data processing and quality to training, evaluation and controlled experiments:
 
-```text
-Raw Data → Processing & Quality → Training → Evaluation → Controlled Experiments
+```mermaid
+flowchart LR
+  raw["Raw data"] --> process["Stage-specific processing<br/>and quality checks"]
+  process --> dataset["Versioned dataset<br/>manifest + quality report"]
+  dataset --> preview["Preview recipe<br/>and resource estimate"]
+  preview --> train["Training run"]
+  train --> evaluate["Evaluation<br/>shared protocol"]
+  evaluate --> compare["Controlled comparison"]
+  compare --> evidence["Evidence report"]
 ```
 
 It is **not** a replacement for ms-swift. ms-swift is the training engine; OneGPU-PostTrain is the reproducible experiment layer around it.
 
 Data quality is a first-class part of that experiment layer: each stage needs stage-appropriate evidence for structure, semantics, distribution and leakage—not just a sample count. The build report records the processing steps and rejection reasons; dataset lineage connects those quality changes to runs, models and evaluations. Controlled experiments are needed to assess whether a cleaning policy changes model outcomes. See the [Data Quality Design](docs/design/DATA_QUALITY_DESIGN.md) for the report contract and rollout plan.
+
+### Follow an evaluation back to its inputs
+
+Each result stays connected to the dataset, recipe, seed, model and evaluation protocol that produced it:
+
+```mermaid
+flowchart LR
+  dataset["Dataset version"] --> run["Training run"]
+  recipe["Recipe + configuration"] --> run
+  seed["Seed + environment"] --> run
+  run --> checkpoint["Checkpoint / model"]
+  run --> trace["Run logs + resource metrics"]
+  checkpoint --> evaluation["Evaluation run"]
+  evaldata["Evaluation dataset + protocol"] --> evaluation
+  evaluation --> result["Evaluation result"]
+  trace --> comparison["Controlled comparison"]
+  result --> comparison
+```
 
 The detailed schemas, comparison types and delivery plan are in [Data Processing, Quality Change, and Model Effect Design](docs/design/DATA_PROCESSING_EFFECT_DESIGN.md).
 
