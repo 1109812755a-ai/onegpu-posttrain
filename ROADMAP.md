@@ -39,6 +39,14 @@ Build a local interface over existing run/data artifacts. Artifact browsing stay
 
 The UI release gate is correct rendering of representative real artifacts, safe local file access, documented startup/shutdown, and validated opt-in policy editing. Model effects remain unassessed until compatible registered training/evaluation evidence exists. See the [frontend roadmap](docs/design/frontend/FRONTEND_ROADMAP.md) and [policy experiment guide](docs/guides/POLICY_EXPERIMENT_UI_zh.md).
 
+## Next capability track — Workspace Experiment Agent (planned)
+
+This is a product-workflow assistant track, distinct from v0.6 Agent / Tool RL, which is about post-training models for tool use. The first increment is planned as an independent, read-only chat entry that answers questions across workspace datasets, processing/quality reports, runs, models/checkpoints and evaluations. Answers should cite records, separate stored facts from interpretation, and make missing or incompatible evidence visible. Planned foundations include configurable specialist assistant profiles, a local OpenAI-compatible model, conversation context and user-controlled memory, task status, optional Langfuse traces and basic evaluation.
+
+Later increments may accept an experiment goal, produce a reviewable plan and invoke platform-owned generation, training and evaluation workflows after user approval. Targeted data generation is an early specialist-agent example; Skills, MCP tools and web research are extension candidates. Arbitrary shell/Python execution is outside the first increment. The release number and detailed implementation gates remain to be assigned after the initial scope is reviewed.
+
+The long-term direction is an evidence-driven recursive improvement loop: evaluate → diagnose weak scenarios → prepare and review targeted data → train a versioned model → re-evaluate on protected holdouts. Existing lineage, diagnostics and explicit data-generation workflows are building blocks; the full agent-guided loop is not yet implemented.
+
 ## v0.2 — Model Scale and Local Experiment Launcher
 
 - add selected 1B–3B models;

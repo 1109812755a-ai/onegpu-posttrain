@@ -13,9 +13,11 @@
 
 适合希望弄清数据、训练配方和算力限制如何影响实验结果的实践者，而不只是启动一个 Trainer。
 
-- **运行前先预览：** 查看计划命令和输入，再决定是否占用 GPU。
-- **结果可追溯：** 将数据集、配置、随机种子、检查点和资源指标关联到每次运行。
-- **比较有依据：** 使用统一协议比较训练阶段和配方，并明确结果限制。
+- **看清数据如何影响实验：** 确定性、分阶段的数据构建保留处理轨迹、质量证据和污染检查。
+- **追溯数据血缘与模型血缘：** 将版本化数据集和报告关联到消费它的 Run、父模型、Adapter、合并检查点及评测协议。
+- **围绕薄弱场景定向补数：** 根据逐题评测准备补数计划；显式启用的 SFT 流程可生成候选数据，再验证、审核、登记并进入训练和复测。
+- **在单卡预算内规划和比较：** 运行前预览命令和资源估算，再用统一评测和资源证据比较配方。
+- **面向证据驱动的 RSI：** 让每次评测为下一轮数据和模型迭代提供依据，同时保护留出集并保留完整证据。
 
 **从这里开始：**[无需 GPU 的检查](docs/guides/QUICKSTART.md#2-cpu-only-developer-validation) · [在 CUDA GPU 上运行](docs/guides/QUICKSTART.md#6-run-the-complete-smoke-pipeline)
 
@@ -114,6 +116,9 @@ DPO、SimPO、GRPO 默认都是从**同一个 merged M2-SFT** 出发的平行实
 | 设计修订版 v0.1.1 | ✅ | 面向产品发布版 v0.1 的数据、训练、评测、实验设计已冻结 |
 | FineMath / OpenR1 数据构建 | ✅ | Streaming / 本地 JSONL、确定性 split、门禁与报告 |
 | Benchmark contamination | ✅ | OpenR1 在 split 前处理；CPT 额外报告污染风险 |
+| 数据血缘 | ✅ 代码完成 | 版本化 manifest 将处理与质量证据关联到实际消费数据的 Run；详见[血缘设计](docs/design/LINEAGE_DESIGN_zh.md) |
+| 模型与评测血缘 | ✅ 代码完成 | 关联父模型、Adapter、合并检查点和评测来源；历史缺口如实记录 |
+| 定向补数工作流 | 🟡 已有切片 | 薄弱场景计划，以及显式启用的 SFT 生成、审核和登记；尚非自主改进闭环 |
 | Canonical → ms-swift | ✅ | CPT / SFT / Preference / GRPO |
 | Base Evaluation | ✅ 代码完成 | EvalScope + Internal Holdout + Domain PPL |
 | PEFT-CPT / M1 merge | ✅ 代码完成 | 20-step Smoke |
@@ -377,6 +382,28 @@ v0.5   Data Flywheel / Model Flywheel
 v0.6   Agent / Tool RL
 v1.0   Reproducible Post-Training Research Platform
 ```
+
+### 长期方向：证据驱动的递归式自我改进（RSI）
+
+项目目标是形成一个受控闭环：评测模型、诊断薄弱场景、准备并审核定向数据、训练出有版本记录的模型，再重新评测。每轮都保留留出集隔离、用户确认、预算约束以及数据和模型血缘。
+
+```mermaid
+flowchart LR
+  evaluate["评测当前模型"] --> diagnose["诊断薄弱场景"]
+  diagnose --> plan["规划定向数据"]
+  plan --> generate["显式生成 + 验证 + 审核"]
+  generate --> train["按已批准配方训练"]
+  train --> retest["在受保护留出集上复测"]
+  retest --> evaluate
+```
+
+仓库已有这条闭环的部分基础：数据与模型血缘、评测诊断、定向补数计划，以及显式启用的 SFT 生成/审核/登记流程。完整的 Agent 驱动闭环仍属规划；当前能力不能证明模型已实现自主或重复改进。
+
+### 下一项规划能力：工作区实验 Agent
+
+下一项 Agent 能力规划是提供独立聊天入口，跨数据集、处理与质量报告、Runs、模型、检查点和评测记录回答问题。第一步定位为**只读、基于证据的分析**：引用工作区记录，区分事实与解释，并指出缺失或不可比较的证据。规划中还包括用户配置专用分析助手、本地 OpenAI 兼容模型、对话上下文与记忆，以及可选的 Langfuse 观测和评估。
+
+后续阶段再把实验目标整理成可审阅计划，并在用户确认后调用平台已有工作流。定向数据生成 Agent 是早期专用 Agent 的例子；Skills、MCP 工具和联网调研属于后续扩展候选。第一步不会运行任意命令，也不会修改训练或数据产物。工作区 Agent 与 v0.6 的 Agent / Tool RL 分开规划，具体发布版本号待范围确认后确定。
 
 详细见 [`ROADMAP.md`](ROADMAP.md)。
 前端路线详见[中文路线图](docs/design/frontend/FRONTEND_ROADMAP_zh.md)。只读 Data 工作台与显式启用的固定 Mini SFT Launcher 已实现；更广泛的配方选择/参数编辑仍按路线图单独评审。

@@ -13,9 +13,11 @@
 
 Built for practitioners who want to understand how data, training recipes, and compute limits affect an experiment—not only launch a trainer.
 
-- **Preview before you run:** inspect the planned commands and inputs before allocating GPU memory.
-- **Trace each result:** connect datasets, configs, seeds, checkpoints, and resource metrics to a run.
-- **Compare consistently:** evaluate stages and recipes with shared protocols and explicit limitations.
+- **See how data changes the experiment:** deterministic, stage-aware builds include processing traces, quality evidence and contamination checks.
+- **Follow data and model lineage:** link versioned datasets and reports to consuming runs, parent models, adapters, merged checkpoints and evaluation protocols.
+- **Target diagnosed gaps:** use per-question evaluation to prepare targeted data plans; an explicitly enabled SFT workflow can generate candidates for validation, review and registration before retraining and retesting.
+- **Plan and compare within one-GPU budgets:** preview commands and resource estimates before a run, then compare recipes with shared evaluation and resource evidence.
+- **Build toward evidence-driven RSI:** use each evaluation to guide the next data/model iteration, with protected holdouts and traceable evidence.
 
 **Start here:** [CPU-only checks](docs/guides/QUICKSTART.md#2-cpu-only-developer-validation) · [Run on a CUDA GPU](docs/guides/QUICKSTART.md#6-run-the-complete-smoke-pipeline)
 
@@ -114,6 +116,9 @@ The alignment/RL branches start from the **same merged M2-SFT checkpoint**. They
 | Design revision v0.1.1 | ✅ | Frozen architecture, data, training, evaluation and experiment contracts for product release v0.1 |
 | FineMath / OpenR1 data build | ✅ | Streaming/local JSONL, deterministic splits, gates and reports |
 | Benchmark decontamination | ✅ | Applied before OpenR1 split; CPT contamination is reported |
+| Data lineage | ✅ code | Versioned manifests connect processing and quality evidence to consuming runs; see [Lineage Design](docs/design/LINEAGE_DESIGN.md) |
+| Model and evaluation lineage | ✅ code | Parent models, adapters, merged checkpoints and evaluation provenance are linked; historical gaps remain documented |
+| Targeted data workflow | 🟡 Early slices | Weak-scenario plans plus opt-in SFT generation, review and registration; not an autonomous improvement loop |
 | Canonical → ms-swift adapter | ✅ | CPT, SFT, preference and GRPO formats |
 | Base evaluation | ✅ code | EvalScope + internal holdout + domain PPL |
 | PEFT-CPT / M1 merge | ✅ code | 20-step smoke recipe |
@@ -377,6 +382,28 @@ v0.5   Data Flywheel / Model Flywheel experiments
 v0.6   Agent / Tool RL
 v1.0   Reproducible Post-Training Research Platform
 ```
+
+### Long-term direction: evidence-driven recursive self-improvement (RSI)
+
+The project aims to form a controlled loop: evaluate a model, diagnose weak scenarios, prepare and review targeted data, train a versioned model, then evaluate again. Each cycle should preserve holdout isolation, user approval, budgets and data/model lineage.
+
+```mermaid
+flowchart LR
+  evaluate["Evaluate current model"] --> diagnose["Diagnose weak scenarios"]
+  diagnose --> plan["Plan targeted data"]
+  plan --> generate["Explicit generation + validation + review"]
+  generate --> train["Train with an approved recipe"]
+  train --> retest["Re-evaluate on protected holdout"]
+  retest --> evaluate
+```
+
+The repository already contains parts of this loop: lineage, evaluation diagnostics, targeted-data planning and an opt-in SFT generation/review/registration workflow. The complete agent-guided loop is planned; current capabilities do not establish autonomous or repeated model improvement.
+
+### Next planned capability: Workspace Experiment Agent
+
+The next agent milestone is a standalone chat entry for questions across datasets, processing and quality reports, runs, models, checkpoints and evaluations. The first increment is planned as **read-only, evidence-based analysis**: cite workspace records, distinguish facts from interpretation, and surface missing or incompatible evidence. Planned foundations include user-configured specialist assistants, a local OpenAI-compatible model, conversation context and memory, and optional Langfuse observability and evaluation.
+
+Later increments can turn an experiment goal into a reviewable plan and, after user approval, invoke platform-owned workflows. A targeted-data generation agent is an early specialist example; skills, MCP tools and web research are extension candidates. The first increment will not run arbitrary commands or modify training and dataset artifacts. The Agent track is planned separately from v0.6 Agent / Tool RL, and its release number is not assigned yet.
 
 See the [frontend roadmap](docs/design/frontend/FRONTEND_ROADMAP.md) for UI scope and gates. The read-only Data page is an early preview; the complete UI release remains planned.
 
