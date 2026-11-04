@@ -16,6 +16,7 @@ Built for practitioners who want to understand how data, training recipes, and c
 - **See how data changes the experiment:** deterministic, stage-aware builds include processing traces, quality evidence and contamination checks.
 - **Follow data and model lineage:** link versioned datasets and reports to consuming runs, parent models, adapters, merged checkpoints and evaluation protocols.
 - **Target diagnosed gaps:** use per-question evaluation to prepare targeted data plans; an explicitly enabled SFT workflow can generate candidates for validation, review and registration before retraining and retesting.
+- **Troubleshoot experiments with an evidence-backed assistant:** ask about failed runs, evaluation changes and data/model lineage in the workspace. The read-only assistant cites recorded evidence, checks whether evaluations are comparable, and calls out missing information; sending context to Bailian requires session consent.
 - **Plan and compare within one-GPU budgets:** preview commands and resource estimates before a run, then compare recipes with shared evaluation and resource evidence.
 - **Build toward evidence-driven RSI:** use each evaluation to guide the next data/model iteration, with protected holdouts and traceable evidence.
 
@@ -119,6 +120,7 @@ The alignment/RL branches start from the **same merged M2-SFT checkpoint**. They
 | Data lineage | ✅ code | Versioned manifests connect processing and quality evidence to consuming runs; see [Lineage Design](docs/design/LINEAGE_DESIGN.md) |
 | Model and evaluation lineage | ✅ code | Parent models, adapters, merged checkpoints and evaluation provenance are linked; historical gaps remain documented |
 | Targeted data workflow | 🟡 Early slices | Weak-scenario plans plus opt-in SFT generation, review and registration; not an autonomous improvement loop |
+| Workspace experiment assistant | ✅ code | Helps locate recorded run/evaluation issues, trace lineage and compare evaluations; read-only, evidence-cited, with explicit Bailian data-sharing consent. See the [usage and data guide (Chinese)](docs/assistant/workspace-assistant-mvp.md) |
 | Canonical → ms-swift adapter | ✅ | CPT, SFT, preference and GRPO formats |
 | Base evaluation | ✅ code | EvalScope + internal holdout + domain PPL |
 | PEFT-CPT / M1 merge | ✅ code | 20-step smoke recipe |
@@ -399,11 +401,11 @@ flowchart LR
 
 The repository already contains parts of this loop: lineage, evaluation diagnostics, targeted-data planning and an opt-in SFT generation/review/registration workflow. The complete agent-guided loop is planned; current capabilities do not establish autonomous or repeated model improvement.
 
-### Next planned capability: Workspace Experiment Agent
+### Workspace Experiment Assistant
 
-The next agent milestone is a standalone chat entry for questions across datasets, processing and quality reports, runs, models, checkpoints and evaluations. The first increment is planned as **read-only, evidence-based analysis**: cite workspace records, distinguish facts from interpretation, and surface missing or incompatible evidence. Planned foundations include user-configured specialist assistants, a local OpenAI-compatible model, conversation context and memory, and optional Langfuse observability and evaluation.
+The first workspace-assistant increment is implemented on the current development branch. Ask questions across runs, evaluations, datasets and model lineage to help locate recorded experiment issues and understand evaluation changes. Answers cite workspace evidence, distinguish recorded facts from interpretation, and surface missing or incompatible evidence. The assistant is read-only: it does not execute commands or start training, and sharing question context with Bailian requires consent for that session.
 
-Later increments can turn an experiment goal into a reviewable plan and, after user approval, invoke platform-owned workflows. A targeted-data generation agent is an early specialist example; skills, MCP tools and web research are extension candidates. The first increment will not run arbitrary commands or modify training and dataset artifacts. The Agent track is planned separately from v0.6 Agent / Tool RL, and its release number is not assigned yet.
+Planning experiment workflows and invoking platform-owned generation, training or evaluation after user approval remain future work. The broader agent-guided improvement loop, Skills, MCP tools and web research are not part of this delivered increment. This product-workflow assistant is distinct from v0.6 Agent / Tool RL, which studies post-training models for tool use.
 
 See the [frontend roadmap](docs/design/frontend/FRONTEND_ROADMAP.md) for UI scope and gates. The read-only Data page is an early preview; the complete UI release remains planned.
 
