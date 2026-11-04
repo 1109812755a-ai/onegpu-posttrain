@@ -1,0 +1,12 @@
+profile_id: dashscope-qwen3.8-max-weight-space
+adapter: openai_compatible
+endpoint: https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions
+model: qwen3.8-max
+api_key_env: ONEGPU_SYNTHETIC_API_KEY
+supported_parameters:
+  - temperature
+  - max_output_tokens
+supports_json_object: true
+revision: null
+input_cost_per_million_tokens: null
+output_cost_per_million_tokens: null

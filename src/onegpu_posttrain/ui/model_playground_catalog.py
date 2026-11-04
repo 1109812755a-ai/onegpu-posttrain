@@ -205,7 +205,7 @@ class ModelPlaygroundCatalog:
             resolved = candidate.resolve(strict=True)
             if not resolved.is_dir():
                 return None
-            if kind == "merged":
+            if kind in {"merged", "weight_space_candidate"}:
                 if not resolved.is_relative_to(self.workspace) or _has_unsafe_symlink(candidate, self.workspace):
                     return None
             else:
@@ -242,7 +242,7 @@ class ModelPlaygroundCatalog:
             kind = record.get("kind")
             if not isinstance(model_id, str) or not _MODEL_ID.fullmatch(model_id) or model_id in seen:
                 continue
-            if kind not in {"base", "merged"}:
+            if kind not in {"base", "merged", "weight_space_candidate"}:
                 continue
             seen.add(model_id)
             source = sources.get(model_id) if kind == "merged" else None
@@ -261,6 +261,27 @@ class ModelPlaygroundCatalog:
                 reason = "缺少成功训练 Run 的已验证模型血缘"
             elif not reason and kind == "merged" and source.get("produced_by_run_id") != record.get("produced_by_run_id"):
                 reason = "模型登记与已验证 Run 血缘不一致"
+            if not reason and kind == "weight_space_candidate":
+                edit_path = record.get("edit_artifact_path")
+                if (not isinstance(edit_path, str) or not edit_path
+                        or not isinstance(record.get("parent_model_ids"), list)
+                        or len(record["parent_model_ids"]) != 1):
+                    reason = "候选模型缺少父模型或编辑产物血缘"
+                else:
+                    edit_file = Path(edit_path)
+                    if not edit_file.is_absolute():
+                        edit_file = self.workspace / edit_file
+                    try:
+                        edit_resolved = edit_file.resolve(strict=True)
+                        if (not edit_resolved.is_relative_to(self.workspace) or edit_file.is_symlink()
+                                or edit_resolved.parent != path.parent):
+                            raise ValueError("candidate edit path mismatch")
+                        edit_record = _read_json(edit_resolved, self.workspace)
+                        if (not edit_record or edit_record.get("candidate_sha256") != expected
+                                or not isinstance(edit_record.get("parent_sha256"), str)):
+                            raise ValueError("candidate edit digest mismatch")
+                    except (OSError, ValueError, RuntimeError):
+                        reason = "候选模型编辑产物无效"
             result.append({
                 "model_id": model_id,
                 "kind": kind,

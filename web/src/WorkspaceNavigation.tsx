@@ -7,6 +7,7 @@ export const PRIMARY_MODULES = [
   { id: "training", name: "训练与评测", icon: "runs", module: "training" },
   { id: "runs", name: "实验 Runs", icon: "runs", module: "runs" },
   { id: "analysis", name: "分析与改进", icon: "chart", module: "analysis" },
+  { id: "assistant", name: "实验助手", icon: "chat", module: "assistant" },
 ] as const;
 
 export const MODULE_VIEWS = {
@@ -18,6 +19,7 @@ export const MODULE_VIEWS = {
   training: [
     { page: "launcher", name: "阶段工作台" },
     { page: "model-playground", name: "模型体验" },
+    { page: "weight-space", name: "权重空间实验" },
   ],
   runs: [{ page: "runs", name: "运行记录" }],
   analysis: [
@@ -25,6 +27,7 @@ export const MODULE_VIEWS = {
     { page: "policy-effects", name: "策略效果" },
     { page: "targeted", name: "薄弱场景" },
   ],
+  assistant: [],
 } as const;
 
 type WorkspaceNavigationProps = {

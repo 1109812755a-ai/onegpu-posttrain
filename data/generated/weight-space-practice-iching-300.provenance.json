@@ -1,0 +1,3246 @@
+{
+  "schema_version": "1.0",
+  "dataset_name": "weight-space-practice-iching-300-v2",
+  "purpose": "weight_space_practice_not_final_evaluation",
+  "heldout_suite_id": "ds-eval-upload-54ca42ca021d295d8390",
+  "heldout_suite_sha256": "19f02eab2e2d3894269eda8f41115c22c2f203cfe3c3cbb3604ab19488004ac2",
+  "created_at": "2026-11-03",
+  "generation_seed": 20261103,
+  "counts": {
+    "total": 300,
+    "single_choice": 100,
+    "multiple_choice": 89,
+    "true_false": 111
+  },
+  "topic_counts": {
+    "hexagram_structure_and_sequence": 160,
+    "eight_trigrams": 61,
+    "ten_wings_and_yi_principles": 79
+  },
+  "sources": {
+    "zhouyi": {
+      "title": "周易",
+      "url": "https://zh.wikisource.org/w/index.php?title=周易&oldid=7907208",
+      "revision": "7907208",
+      "license": "原作标示为公有领域；维基文库页面文字 CC BY-SA 4.0"
+    },
+    "shuogua": {
+      "title": "易传/说卦",
+      "url": "https://zh.wikisource.org/w/index.php?title=易傳/說卦&oldid=2614055",
+      "revision": "2614055",
+      "license": "CC BY-SA 4.0"
+    },
+    "xugua": {
+      "title": "易传/序卦",
+      "url": "https://zh.wikisource.org/w/index.php?title=易傳/序卦&oldid=2611127",
+      "revision": "2611127",
+      "license": "CC BY-SA 4.0"
+    },
+    "zagua": {
+      "title": "易传/杂卦",
+      "url": "https://zh.wikisource.org/w/index.php?title=易傳/雜卦&oldid=2611129",
+      "revision": "2611129",
+      "license": "CC BY-SA 4.0"
+    },
+    "xici1": {
+      "title": "易传/系辞上",
+      "url": "https://zh.wikisource.org/w/index.php?title=易傳/繫辭上&oldid=2611140",
+      "revision": "2611140",
+      "license": "CC BY-SA 4.0"
+    },
+    "xici2": {
+      "title": "易传/系辞下",
+      "url": "https://zh.wikisource.org/w/index.php?title=易傳/繫辭下&oldid=2611136",
+      "revision": "2611136",
+      "license": "CC BY-SA 4.0"
+    },
+    "wenyan": {
+      "title": "周易/文言",
+      "url": "https://zh.wikisource.org/w/index.php?title=周易/文言&oldid=2615215",
+      "revision": "2615215",
+      "license": "CC BY-SA 4.0"
+    }
+  },
+  "attribution": "Chinese Wikisource contributors, 周易 and 易传 pages. Fixed revisions are recorded. Wikisource page text is CC BY-SA 4.0; the underlying work is marked public domain.",
+  "review_status": "Answer keys derive from the cited hexagram/trigram tables and authored text propositions. Structural/schema validation is reproducible; no independent subject-matter-expert review is claimed.",
+  "overlap_review": {
+    "method": "normalized exact stem comparison and character 3-gram Jaccard review against all 81 held-out prompts",
+    "exact_normalized_stem_matches": 0,
+    "pairs_jaccard_at_or_above_0_20_after_revision": 0,
+    "initial_near_duplicate_rewritten": "Replaced one Da Yan number fact with an independent Xici passage fact.",
+    "limitation": "Questions intentionally cover the same I Ching domain; lexical review cannot prove semantic independence."
+  },
+  "records": {
+    "iching-practice-001": {
+      "topic": "hexagram_structure",
+      "answer": "C",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "乾"
+      },
+      "answer_evidence": "乾卦画为乾下乾上。"
+    },
+    "iching-practice-002": {
+      "topic": "hexagram_structure",
+      "answer": "D",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "夬"
+      },
+      "answer_evidence": "夬卦画为乾下兑上。"
+    },
+    "iching-practice-003": {
+      "topic": "hexagram_structure",
+      "answer": "A",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "大有"
+      },
+      "answer_evidence": "大有卦画为乾下离上。"
+    },
+    "iching-practice-004": {
+      "topic": "hexagram_structure",
+      "answer": "B",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "大壮"
+      },
+      "answer_evidence": "大壮卦画为乾下震上。"
+    },
+    "iching-practice-005": {
+      "topic": "hexagram_structure",
+      "answer": "D",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "小畜"
+      },
+      "answer_evidence": "小畜卦画为乾下巽上。"
+    },
+    "iching-practice-006": {
+      "topic": "hexagram_structure",
+      "answer": "C",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "需"
+      },
+      "answer_evidence": "需卦画为乾下坎上。"
+    },
+    "iching-practice-007": {
+      "topic": "hexagram_structure",
+      "answer": "C",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "大畜"
+      },
+      "answer_evidence": "大畜卦画为乾下艮上。"
+    },
+    "iching-practice-008": {
+      "topic": "hexagram_structure",
+      "answer": "D",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "泰"
+      },
+      "answer_evidence": "泰卦画为乾下坤上。"
+    },
+    "iching-practice-009": {
+      "topic": "hexagram_structure",
+      "answer": "B",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "履"
+      },
+      "answer_evidence": "履卦画为兑下乾上。"
+    },
+    "iching-practice-010": {
+      "topic": "hexagram_structure",
+      "answer": "C",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "兑"
+      },
+      "answer_evidence": "兑卦画为兑下兑上。"
+    },
+    "iching-practice-011": {
+      "topic": "hexagram_structure",
+      "answer": "D",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "睽"
+      },
+      "answer_evidence": "睽卦画为兑下离上。"
+    },
+    "iching-practice-012": {
+      "topic": "hexagram_structure",
+      "answer": "D",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "归妹"
+      },
+      "answer_evidence": "归妹卦画为兑下震上。"
+    },
+    "iching-practice-013": {
+      "topic": "hexagram_structure",
+      "answer": "A",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "中孚"
+      },
+      "answer_evidence": "中孚卦画为兑下巽上。"
+    },
+    "iching-practice-014": {
+      "topic": "hexagram_structure",
+      "answer": "D",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "节"
+      },
+      "answer_evidence": "节卦画为兑下坎上。"
+    },
+    "iching-practice-015": {
+      "topic": "hexagram_structure",
+      "answer": "D",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "损"
+      },
+      "answer_evidence": "损卦画为兑下艮上。"
+    },
+    "iching-practice-016": {
+      "topic": "hexagram_structure",
+      "answer": "A",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "临"
+      },
+      "answer_evidence": "临卦画为兑下坤上。"
+    },
+    "iching-practice-017": {
+      "topic": "hexagram_structure",
+      "answer": "A",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "同人"
+      },
+      "answer_evidence": "同人卦画为离下乾上。"
+    },
+    "iching-practice-018": {
+      "topic": "hexagram_structure",
+      "answer": "B",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "革"
+      },
+      "answer_evidence": "革卦画为离下兑上。"
+    },
+    "iching-practice-019": {
+      "topic": "hexagram_structure",
+      "answer": "D",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "离"
+      },
+      "answer_evidence": "离卦画为离下离上。"
+    },
+    "iching-practice-020": {
+      "topic": "hexagram_structure",
+      "answer": "D",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "丰"
+      },
+      "answer_evidence": "丰卦画为离下震上。"
+    },
+    "iching-practice-021": {
+      "topic": "hexagram_structure",
+      "answer": "A",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "家人"
+      },
+      "answer_evidence": "家人卦画为离下巽上。"
+    },
+    "iching-practice-022": {
+      "topic": "hexagram_structure",
+      "answer": "A",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "既济"
+      },
+      "answer_evidence": "既济卦画为离下坎上。"
+    },
+    "iching-practice-023": {
+      "topic": "hexagram_structure",
+      "answer": "A",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "贲"
+      },
+      "answer_evidence": "贲卦画为离下艮上。"
+    },
+    "iching-practice-024": {
+      "topic": "hexagram_structure",
+      "answer": "C",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "明夷"
+      },
+      "answer_evidence": "明夷卦画为离下坤上。"
+    },
+    "iching-practice-025": {
+      "topic": "hexagram_structure",
+      "answer": "A",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "无妄"
+      },
+      "answer_evidence": "无妄卦画为震下乾上。"
+    },
+    "iching-practice-026": {
+      "topic": "hexagram_structure",
+      "answer": "C",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "随"
+      },
+      "answer_evidence": "随卦画为震下兑上。"
+    },
+    "iching-practice-027": {
+      "topic": "hexagram_structure",
+      "answer": "C",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "噬嗑"
+      },
+      "answer_evidence": "噬嗑卦画为震下离上。"
+    },
+    "iching-practice-028": {
+      "topic": "hexagram_structure",
+      "answer": "C",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "震"
+      },
+      "answer_evidence": "震卦画为震下震上。"
+    },
+    "iching-practice-029": {
+      "topic": "hexagram_structure",
+      "answer": "C",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "益"
+      },
+      "answer_evidence": "益卦画为震下巽上。"
+    },
+    "iching-practice-030": {
+      "topic": "hexagram_structure",
+      "answer": "D",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "屯"
+      },
+      "answer_evidence": "屯卦画为震下坎上。"
+    },
+    "iching-practice-031": {
+      "topic": "hexagram_structure",
+      "answer": "D",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "颐"
+      },
+      "answer_evidence": "颐卦画为震下艮上。"
+    },
+    "iching-practice-032": {
+      "topic": "hexagram_structure",
+      "answer": "C",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "复"
+      },
+      "answer_evidence": "复卦画为震下坤上。"
+    },
+    "iching-practice-033": {
+      "topic": "hexagram_structure",
+      "answer": "B",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "姤"
+      },
+      "answer_evidence": "姤卦画为巽下乾上。"
+    },
+    "iching-practice-034": {
+      "topic": "hexagram_structure",
+      "answer": "D",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "大过"
+      },
+      "answer_evidence": "大过卦画为巽下兑上。"
+    },
+    "iching-practice-035": {
+      "topic": "hexagram_structure",
+      "answer": "D",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "鼎"
+      },
+      "answer_evidence": "鼎卦画为巽下离上。"
+    },
+    "iching-practice-036": {
+      "topic": "hexagram_structure",
+      "answer": "B",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "恒"
+      },
+      "answer_evidence": "恒卦画为巽下震上。"
+    },
+    "iching-practice-037": {
+      "topic": "hexagram_structure",
+      "answer": "D",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "巽"
+      },
+      "answer_evidence": "巽卦画为巽下巽上。"
+    },
+    "iching-practice-038": {
+      "topic": "hexagram_structure",
+      "answer": "A",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "井"
+      },
+      "answer_evidence": "井卦画为巽下坎上。"
+    },
+    "iching-practice-039": {
+      "topic": "hexagram_structure",
+      "answer": "B",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "蛊"
+      },
+      "answer_evidence": "蛊卦画为巽下艮上。"
+    },
+    "iching-practice-040": {
+      "topic": "hexagram_structure",
+      "answer": "A",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "升"
+      },
+      "answer_evidence": "升卦画为巽下坤上。"
+    },
+    "iching-practice-041": {
+      "topic": "hexagram_structure",
+      "answer": "B",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "讼"
+      },
+      "answer_evidence": "讼卦画为坎下乾上。"
+    },
+    "iching-practice-042": {
+      "topic": "hexagram_structure",
+      "answer": "B",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "困"
+      },
+      "answer_evidence": "困卦画为坎下兑上。"
+    },
+    "iching-practice-043": {
+      "topic": "hexagram_structure",
+      "answer": "A",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "未济"
+      },
+      "answer_evidence": "未济卦画为坎下离上。"
+    },
+    "iching-practice-044": {
+      "topic": "hexagram_structure",
+      "answer": "A",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "解"
+      },
+      "answer_evidence": "解卦画为坎下震上。"
+    },
+    "iching-practice-045": {
+      "topic": "hexagram_structure",
+      "answer": "D",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "涣"
+      },
+      "answer_evidence": "涣卦画为坎下巽上。"
+    },
+    "iching-practice-046": {
+      "topic": "hexagram_structure",
+      "answer": "B",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "坎"
+      },
+      "answer_evidence": "坎卦画为坎下坎上。"
+    },
+    "iching-practice-047": {
+      "topic": "hexagram_structure",
+      "answer": "D",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "蒙"
+      },
+      "answer_evidence": "蒙卦画为坎下艮上。"
+    },
+    "iching-practice-048": {
+      "topic": "hexagram_structure",
+      "answer": "B",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "师"
+      },
+      "answer_evidence": "师卦画为坎下坤上。"
+    },
+    "iching-practice-049": {
+      "topic": "hexagram_structure",
+      "answer": "B",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "遁"
+      },
+      "answer_evidence": "遁卦画为艮下乾上。"
+    },
+    "iching-practice-050": {
+      "topic": "hexagram_structure",
+      "answer": "A",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "咸"
+      },
+      "answer_evidence": "咸卦画为艮下兑上。"
+    },
+    "iching-practice-051": {
+      "topic": "hexagram_structure",
+      "answer": "C",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "旅"
+      },
+      "answer_evidence": "旅卦画为艮下离上。"
+    },
+    "iching-practice-052": {
+      "topic": "hexagram_structure",
+      "answer": "A",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "小过"
+      },
+      "answer_evidence": "小过卦画为艮下震上。"
+    },
+    "iching-practice-053": {
+      "topic": "hexagram_structure",
+      "answer": "D",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "渐"
+      },
+      "answer_evidence": "渐卦画为艮下巽上。"
+    },
+    "iching-practice-054": {
+      "topic": "hexagram_structure",
+      "answer": "B",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "蹇"
+      },
+      "answer_evidence": "蹇卦画为艮下坎上。"
+    },
+    "iching-practice-055": {
+      "topic": "hexagram_structure",
+      "answer": "D",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "艮"
+      },
+      "answer_evidence": "艮卦画为艮下艮上。"
+    },
+    "iching-practice-056": {
+      "topic": "hexagram_structure",
+      "answer": "A",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "谦"
+      },
+      "answer_evidence": "谦卦画为艮下坤上。"
+    },
+    "iching-practice-057": {
+      "topic": "hexagram_structure",
+      "answer": "A",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "否"
+      },
+      "answer_evidence": "否卦画为坤下乾上。"
+    },
+    "iching-practice-058": {
+      "topic": "hexagram_structure",
+      "answer": "A",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "萃"
+      },
+      "answer_evidence": "萃卦画为坤下兑上。"
+    },
+    "iching-practice-059": {
+      "topic": "hexagram_structure",
+      "answer": "B",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "晋"
+      },
+      "answer_evidence": "晋卦画为坤下离上。"
+    },
+    "iching-practice-060": {
+      "topic": "hexagram_structure",
+      "answer": "D",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "豫"
+      },
+      "answer_evidence": "豫卦画为坤下震上。"
+    },
+    "iching-practice-061": {
+      "topic": "hexagram_structure",
+      "answer": "B",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "观"
+      },
+      "answer_evidence": "观卦画为坤下巽上。"
+    },
+    "iching-practice-062": {
+      "topic": "hexagram_structure",
+      "answer": "A",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "比"
+      },
+      "answer_evidence": "比卦画为坤下坎上。"
+    },
+    "iching-practice-063": {
+      "topic": "hexagram_structure",
+      "answer": "D",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "剥"
+      },
+      "answer_evidence": "剥卦画为坤下艮上。"
+    },
+    "iching-practice-064": {
+      "topic": "hexagram_structure",
+      "answer": "B",
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表",
+        "hexagram": "坤"
+      },
+      "answer_evidence": "坤卦画为坤下坤上。"
+    },
+    "iching-practice-065": {
+      "topic": "eight_trigrams",
+      "answer": "B",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将乾配为自然象“天”。"
+    },
+    "iching-practice-066": {
+      "topic": "eight_trigrams",
+      "answer": "D",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将兑配为自然象“泽”。"
+    },
+    "iching-practice-067": {
+      "topic": "eight_trigrams",
+      "answer": "A",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将离配为自然象“火”。"
+    },
+    "iching-practice-068": {
+      "topic": "eight_trigrams",
+      "answer": "C",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将震配为自然象“雷”。"
+    },
+    "iching-practice-069": {
+      "topic": "eight_trigrams",
+      "answer": "B",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将巽配为自然象“风”。"
+    },
+    "iching-practice-070": {
+      "topic": "eight_trigrams",
+      "answer": "B",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将坎配为自然象“水”。"
+    },
+    "iching-practice-071": {
+      "topic": "eight_trigrams",
+      "answer": "C",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将艮配为自然象“山”。"
+    },
+    "iching-practice-072": {
+      "topic": "eight_trigrams",
+      "answer": "A",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将坤配为自然象“地”。"
+    },
+    "iching-practice-073": {
+      "topic": "eight_trigrams",
+      "answer": "A",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将乾配为德性“健”。"
+    },
+    "iching-practice-074": {
+      "topic": "eight_trigrams",
+      "answer": "C",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将兑配为德性“说”。"
+    },
+    "iching-practice-075": {
+      "topic": "eight_trigrams",
+      "answer": "B",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将离配为德性“丽”。"
+    },
+    "iching-practice-076": {
+      "topic": "eight_trigrams",
+      "answer": "C",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将震配为德性“动”。"
+    },
+    "iching-practice-077": {
+      "topic": "eight_trigrams",
+      "answer": "B",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将巽配为德性“入”。"
+    },
+    "iching-practice-078": {
+      "topic": "eight_trigrams",
+      "answer": "B",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将坎配为德性“陷”。"
+    },
+    "iching-practice-079": {
+      "topic": "eight_trigrams",
+      "answer": "D",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将艮配为德性“止”。"
+    },
+    "iching-practice-080": {
+      "topic": "eight_trigrams",
+      "answer": "B",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将坤配为德性“顺”。"
+    },
+    "iching-practice-081": {
+      "topic": "eight_trigrams",
+      "answer": "D",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将乾配为家族角色“父”。"
+    },
+    "iching-practice-082": {
+      "topic": "eight_trigrams",
+      "answer": "C",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将兑配为家族角色“少女”。"
+    },
+    "iching-practice-083": {
+      "topic": "eight_trigrams",
+      "answer": "C",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将离配为家族角色“中女”。"
+    },
+    "iching-practice-084": {
+      "topic": "eight_trigrams",
+      "answer": "A",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将震配为家族角色“长男”。"
+    },
+    "iching-practice-085": {
+      "topic": "eight_trigrams",
+      "answer": "A",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将巽配为家族角色“长女”。"
+    },
+    "iching-practice-086": {
+      "topic": "eight_trigrams",
+      "answer": "C",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将坎配为家族角色“中男”。"
+    },
+    "iching-practice-087": {
+      "topic": "eight_trigrams",
+      "answer": "D",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将艮配为家族角色“少男”。"
+    },
+    "iching-practice-088": {
+      "topic": "eight_trigrams",
+      "answer": "B",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将坤配为家族角色“母”。"
+    },
+    "iching-practice-089": {
+      "topic": "eight_trigrams",
+      "answer": "D",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将乾配为身体象“首”。"
+    },
+    "iching-practice-090": {
+      "topic": "eight_trigrams",
+      "answer": "A",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将兑配为身体象“口”。"
+    },
+    "iching-practice-091": {
+      "topic": "eight_trigrams",
+      "answer": "C",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将离配为身体象“目”。"
+    },
+    "iching-practice-092": {
+      "topic": "eight_trigrams",
+      "answer": "C",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将震配为身体象“足”。"
+    },
+    "iching-practice-093": {
+      "topic": "eight_trigrams",
+      "answer": "C",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将巽配为身体象“股”。"
+    },
+    "iching-practice-094": {
+      "topic": "eight_trigrams",
+      "answer": "A",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将坎配为身体象“耳”。"
+    },
+    "iching-practice-095": {
+      "topic": "eight_trigrams",
+      "answer": "B",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将艮配为身体象“手”。"
+    },
+    "iching-practice-096": {
+      "topic": "eight_trigrams",
+      "answer": "A",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将坤配为身体象“腹”。"
+    },
+    "iching-practice-097": {
+      "topic": "eight_trigrams",
+      "answer": "A",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将乾配为动物象“马”。"
+    },
+    "iching-practice-098": {
+      "topic": "eight_trigrams",
+      "answer": "D",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将兑配为动物象“羊”。"
+    },
+    "iching-practice-099": {
+      "topic": "eight_trigrams",
+      "answer": "A",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将离配为动物象“雉”。"
+    },
+    "iching-practice-100": {
+      "topic": "eight_trigrams",
+      "answer": "D",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "《说卦》将震配为动物象“龙”。"
+    },
+    "iching-practice-101": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "B",
+        "D",
+        "E"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦乾"
+      },
+      "answer_evidence": "所选卦的上经卦均为乾；其余选项的上经卦不同。"
+    },
+    "iching-practice-102": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "C",
+        "D",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦乾"
+      },
+      "answer_evidence": "所选卦的上经卦均为乾；其余选项的上经卦不同。"
+    },
+    "iching-practice-103": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "C",
+        "D",
+        "E"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦乾"
+      },
+      "answer_evidence": "所选卦的上经卦均为乾；其余选项的上经卦不同。"
+    },
+    "iching-practice-104": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦乾"
+      },
+      "answer_evidence": "所选卦的上经卦均为乾；其余选项的上经卦不同。"
+    },
+    "iching-practice-105": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "E"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦乾"
+      },
+      "answer_evidence": "所选卦的上经卦均为乾；其余选项的上经卦不同。"
+    },
+    "iching-practice-106": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦乾"
+      },
+      "answer_evidence": "所选卦的上经卦均为乾；其余选项的上经卦不同。"
+    },
+    "iching-practice-107": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "B",
+        "D",
+        "E"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦乾"
+      },
+      "answer_evidence": "所选卦的上经卦均为乾；其余选项的上经卦不同。"
+    },
+    "iching-practice-108": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "C",
+        "D",
+        "E"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦乾"
+      },
+      "answer_evidence": "所选卦的上经卦均为乾；其余选项的上经卦不同。"
+    },
+    "iching-practice-109": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "B",
+        "D",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦兑"
+      },
+      "answer_evidence": "所选卦的上经卦均为兑；其余选项的上经卦不同。"
+    },
+    "iching-practice-110": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦兑"
+      },
+      "answer_evidence": "所选卦的上经卦均为兑；其余选项的上经卦不同。"
+    },
+    "iching-practice-111": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "B",
+        "C",
+        "E",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦兑"
+      },
+      "answer_evidence": "所选卦的上经卦均为兑；其余选项的上经卦不同。"
+    },
+    "iching-practice-112": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "B",
+        "D",
+        "E",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦兑"
+      },
+      "answer_evidence": "所选卦的上经卦均为兑；其余选项的上经卦不同。"
+    },
+    "iching-practice-113": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "C",
+        "D",
+        "E"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦兑"
+      },
+      "answer_evidence": "所选卦的上经卦均为兑；其余选项的上经卦不同。"
+    },
+    "iching-practice-114": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "B",
+        "C",
+        "D",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦兑"
+      },
+      "answer_evidence": "所选卦的上经卦均为兑；其余选项的上经卦不同。"
+    },
+    "iching-practice-115": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "E"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦兑"
+      },
+      "answer_evidence": "所选卦的上经卦均为兑；其余选项的上经卦不同。"
+    },
+    "iching-practice-116": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "B",
+        "D",
+        "E"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦兑"
+      },
+      "answer_evidence": "所选卦的上经卦均为兑；其余选项的上经卦不同。"
+    },
+    "iching-practice-117": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦离"
+      },
+      "answer_evidence": "所选卦的上经卦均为离；其余选项的上经卦不同。"
+    },
+    "iching-practice-118": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "C",
+        "E",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦离"
+      },
+      "answer_evidence": "所选卦的上经卦均为离；其余选项的上经卦不同。"
+    },
+    "iching-practice-119": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "C",
+        "E",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦离"
+      },
+      "answer_evidence": "所选卦的上经卦均为离；其余选项的上经卦不同。"
+    },
+    "iching-practice-120": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "B",
+        "D",
+        "E",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦离"
+      },
+      "answer_evidence": "所选卦的上经卦均为离；其余选项的上经卦不同。"
+    },
+    "iching-practice-121": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "B",
+        "C",
+        "D",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦离"
+      },
+      "answer_evidence": "所选卦的上经卦均为离；其余选项的上经卦不同。"
+    },
+    "iching-practice-122": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "C",
+        "E",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦离"
+      },
+      "answer_evidence": "所选卦的上经卦均为离；其余选项的上经卦不同。"
+    },
+    "iching-practice-123": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦离"
+      },
+      "answer_evidence": "所选卦的上经卦均为离；其余选项的上经卦不同。"
+    },
+    "iching-practice-124": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "C",
+        "D",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦离"
+      },
+      "answer_evidence": "所选卦的上经卦均为离；其余选项的上经卦不同。"
+    },
+    "iching-practice-125": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "B",
+        "D",
+        "E",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦震"
+      },
+      "answer_evidence": "所选卦的上经卦均为震；其余选项的上经卦不同。"
+    },
+    "iching-practice-126": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦震"
+      },
+      "answer_evidence": "所选卦的上经卦均为震；其余选项的上经卦不同。"
+    },
+    "iching-practice-127": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "C",
+        "D",
+        "E"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦震"
+      },
+      "answer_evidence": "所选卦的上经卦均为震；其余选项的上经卦不同。"
+    },
+    "iching-practice-128": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦震"
+      },
+      "answer_evidence": "所选卦的上经卦均为震；其余选项的上经卦不同。"
+    },
+    "iching-practice-129": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "B",
+        "C",
+        "E",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦震"
+      },
+      "answer_evidence": "所选卦的上经卦均为震；其余选项的上经卦不同。"
+    },
+    "iching-practice-130": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "E"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦震"
+      },
+      "answer_evidence": "所选卦的上经卦均为震；其余选项的上经卦不同。"
+    },
+    "iching-practice-131": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "B",
+        "E",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦震"
+      },
+      "answer_evidence": "所选卦的上经卦均为震；其余选项的上经卦不同。"
+    },
+    "iching-practice-132": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦震"
+      },
+      "answer_evidence": "所选卦的上经卦均为震；其余选项的上经卦不同。"
+    },
+    "iching-practice-133": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦巽"
+      },
+      "answer_evidence": "所选卦的上经卦均为巽；其余选项的上经卦不同。"
+    },
+    "iching-practice-134": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦巽"
+      },
+      "answer_evidence": "所选卦的上经卦均为巽；其余选项的上经卦不同。"
+    },
+    "iching-practice-135": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦巽"
+      },
+      "answer_evidence": "所选卦的上经卦均为巽；其余选项的上经卦不同。"
+    },
+    "iching-practice-136": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "E"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦巽"
+      },
+      "answer_evidence": "所选卦的上经卦均为巽；其余选项的上经卦不同。"
+    },
+    "iching-practice-137": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "B",
+        "E",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦巽"
+      },
+      "answer_evidence": "所选卦的上经卦均为巽；其余选项的上经卦不同。"
+    },
+    "iching-practice-138": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "E"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦巽"
+      },
+      "answer_evidence": "所选卦的上经卦均为巽；其余选项的上经卦不同。"
+    },
+    "iching-practice-139": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "E"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦巽"
+      },
+      "answer_evidence": "所选卦的上经卦均为巽；其余选项的上经卦不同。"
+    },
+    "iching-practice-140": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "B",
+        "E",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦巽"
+      },
+      "answer_evidence": "所选卦的上经卦均为巽；其余选项的上经卦不同。"
+    },
+    "iching-practice-141": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "B",
+        "C",
+        "E",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦坎"
+      },
+      "answer_evidence": "所选卦的上经卦均为坎；其余选项的上经卦不同。"
+    },
+    "iching-practice-142": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "E"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦坎"
+      },
+      "answer_evidence": "所选卦的上经卦均为坎；其余选项的上经卦不同。"
+    },
+    "iching-practice-143": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦坎"
+      },
+      "answer_evidence": "所选卦的上经卦均为坎；其余选项的上经卦不同。"
+    },
+    "iching-practice-144": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "B",
+        "C",
+        "D",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦坎"
+      },
+      "answer_evidence": "所选卦的上经卦均为坎；其余选项的上经卦不同。"
+    },
+    "iching-practice-145": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "B",
+        "D",
+        "E",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦坎"
+      },
+      "answer_evidence": "所选卦的上经卦均为坎；其余选项的上经卦不同。"
+    },
+    "iching-practice-146": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "B",
+        "C",
+        "E",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦坎"
+      },
+      "answer_evidence": "所选卦的上经卦均为坎；其余选项的上经卦不同。"
+    },
+    "iching-practice-147": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "C",
+        "D",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦坎"
+      },
+      "answer_evidence": "所选卦的上经卦均为坎；其余选项的上经卦不同。"
+    },
+    "iching-practice-148": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "D",
+        "E",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦坎"
+      },
+      "answer_evidence": "所选卦的上经卦均为坎；其余选项的上经卦不同。"
+    },
+    "iching-practice-149": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "B",
+        "D",
+        "E",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦艮"
+      },
+      "answer_evidence": "所选卦的上经卦均为艮；其余选项的上经卦不同。"
+    },
+    "iching-practice-150": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "C",
+        "D",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦艮"
+      },
+      "answer_evidence": "所选卦的上经卦均为艮；其余选项的上经卦不同。"
+    },
+    "iching-practice-151": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "D",
+        "E",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦艮"
+      },
+      "answer_evidence": "所选卦的上经卦均为艮；其余选项的上经卦不同。"
+    },
+    "iching-practice-152": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "C",
+        "D",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦艮"
+      },
+      "answer_evidence": "所选卦的上经卦均为艮；其余选项的上经卦不同。"
+    },
+    "iching-practice-153": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦艮"
+      },
+      "answer_evidence": "所选卦的上经卦均为艮；其余选项的上经卦不同。"
+    },
+    "iching-practice-154": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "D",
+        "E",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦艮"
+      },
+      "answer_evidence": "所选卦的上经卦均为艮；其余选项的上经卦不同。"
+    },
+    "iching-practice-155": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "E"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦艮"
+      },
+      "answer_evidence": "所选卦的上经卦均为艮；其余选项的上经卦不同。"
+    },
+    "iching-practice-156": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "B",
+        "D",
+        "E"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦艮"
+      },
+      "answer_evidence": "所选卦的上经卦均为艮；其余选项的上经卦不同。"
+    },
+    "iching-practice-157": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "B",
+        "D",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦坤"
+      },
+      "answer_evidence": "所选卦的上经卦均为坤；其余选项的上经卦不同。"
+    },
+    "iching-practice-158": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "B",
+        "D",
+        "E",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦坤"
+      },
+      "answer_evidence": "所选卦的上经卦均为坤；其余选项的上经卦不同。"
+    },
+    "iching-practice-159": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦坤"
+      },
+      "answer_evidence": "所选卦的上经卦均为坤；其余选项的上经卦不同。"
+    },
+    "iching-practice-160": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "D",
+        "E",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦坤"
+      },
+      "answer_evidence": "所选卦的上经卦均为坤；其余选项的上经卦不同。"
+    },
+    "iching-practice-161": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "B",
+        "C",
+        "D",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦坤"
+      },
+      "answer_evidence": "所选卦的上经卦均为坤；其余选项的上经卦不同。"
+    },
+    "iching-practice-162": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "E"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦坤"
+      },
+      "answer_evidence": "所选卦的上经卦均为坤；其余选项的上经卦不同。"
+    },
+    "iching-practice-163": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦坤"
+      },
+      "answer_evidence": "所选卦的上经卦均为坤；其余选项的上经卦不同。"
+    },
+    "iching-practice-164": {
+      "topic": "hexagram_structure",
+      "answer": [
+        "A",
+        "B",
+        "E",
+        "F"
+      ],
+      "source": {
+        "ref": "zhouyi",
+        "section": "六十四卦卦画表/上卦坤"
+      },
+      "answer_evidence": "所选卦的上经卦均为坤；其余选项的上经卦不同。"
+    },
+    "iching-practice-165": {
+      "topic": "eight_trigrams",
+      "answer": [
+        "A",
+        "B"
+      ],
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "正确项对应乾的自然象与家族角色取象。"
+    },
+    "iching-practice-166": {
+      "topic": "eight_trigrams",
+      "answer": [
+        "A",
+        "B"
+      ],
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "正确项对应兑的自然象与家族角色取象。"
+    },
+    "iching-practice-167": {
+      "topic": "eight_trigrams",
+      "answer": [
+        "A",
+        "B"
+      ],
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "正确项对应离的自然象与家族角色取象。"
+    },
+    "iching-practice-168": {
+      "topic": "eight_trigrams",
+      "answer": [
+        "A",
+        "B"
+      ],
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "正确项对应震的自然象与家族角色取象。"
+    },
+    "iching-practice-169": {
+      "topic": "eight_trigrams",
+      "answer": [
+        "A",
+        "B"
+      ],
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "正确项对应巽的自然象与家族角色取象。"
+    },
+    "iching-practice-170": {
+      "topic": "eight_trigrams",
+      "answer": [
+        "A",
+        "B"
+      ],
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "正确项对应坎的自然象与家族角色取象。"
+    },
+    "iching-practice-171": {
+      "topic": "eight_trigrams",
+      "answer": [
+        "A",
+        "B"
+      ],
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "正确项对应艮的自然象与家族角色取象。"
+    },
+    "iching-practice-172": {
+      "topic": "eight_trigrams",
+      "answer": [
+        "A",
+        "B"
+      ],
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "正确项对应坤的自然象与家族角色取象。"
+    },
+    "iching-practice-173": {
+      "topic": "eight_trigrams",
+      "answer": [
+        "A",
+        "B"
+      ],
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "正确项对应乾的德性与身体象取象。"
+    },
+    "iching-practice-174": {
+      "topic": "eight_trigrams",
+      "answer": [
+        "A",
+        "B"
+      ],
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "正确项对应兑的德性与身体象取象。"
+    },
+    "iching-practice-175": {
+      "topic": "eight_trigrams",
+      "answer": [
+        "A",
+        "B"
+      ],
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "正确项对应离的德性与身体象取象。"
+    },
+    "iching-practice-176": {
+      "topic": "eight_trigrams",
+      "answer": [
+        "A",
+        "B"
+      ],
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "正确项对应震的德性与身体象取象。"
+    },
+    "iching-practice-177": {
+      "topic": "eight_trigrams",
+      "answer": [
+        "A",
+        "B"
+      ],
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "正确项对应巽的德性与身体象取象。"
+    },
+    "iching-practice-178": {
+      "topic": "eight_trigrams",
+      "answer": [
+        "A",
+        "B"
+      ],
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "正确项对应坎的德性与身体象取象。"
+    },
+    "iching-practice-179": {
+      "topic": "eight_trigrams",
+      "answer": [
+        "A",
+        "B"
+      ],
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "正确项对应艮的德性与身体象取象。"
+    },
+    "iching-practice-180": {
+      "topic": "eight_trigrams",
+      "answer": [
+        "A",
+        "B"
+      ],
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "正确项对应坤的德性与身体象取象。"
+    },
+    "iching-practice-181": {
+      "topic": "eight_trigrams",
+      "answer": [
+        "A",
+        "B"
+      ],
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "正确项对应乾的家族角色与动物象取象。"
+    },
+    "iching-practice-182": {
+      "topic": "eight_trigrams",
+      "answer": [
+        "A",
+        "B"
+      ],
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "正确项对应兑的家族角色与动物象取象。"
+    },
+    "iching-practice-183": {
+      "topic": "eight_trigrams",
+      "answer": [
+        "A",
+        "B"
+      ],
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "正确项对应离的家族角色与动物象取象。"
+    },
+    "iching-practice-184": {
+      "topic": "eight_trigrams",
+      "answer": [
+        "A",
+        "B"
+      ],
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "正确项对应震的家族角色与动物象取象。"
+    },
+    "iching-practice-185": {
+      "topic": "eight_trigrams",
+      "answer": [
+        "A",
+        "B"
+      ],
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "正确项对应巽的家族角色与动物象取象。"
+    },
+    "iching-practice-186": {
+      "topic": "eight_trigrams",
+      "answer": [
+        "A",
+        "B"
+      ],
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "正确项对应坎的家族角色与动物象取象。"
+    },
+    "iching-practice-187": {
+      "topic": "eight_trigrams",
+      "answer": [
+        "A",
+        "B"
+      ],
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "正确项对应艮的家族角色与动物象取象。"
+    },
+    "iching-practice-188": {
+      "topic": "eight_trigrams",
+      "answer": [
+        "A",
+        "B"
+      ],
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "正确项对应坤的家族角色与动物象取象。"
+    },
+    "iching-practice-189": {
+      "topic": "eight_trigrams",
+      "answer": [
+        "A",
+        "B"
+      ],
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦取象"
+      },
+      "answer_evidence": "正确项对应乾的身体象与自然象取象。"
+    },
+    "iching-practice-190": {
+      "topic": "hexagram_structure",
+      "answer": "true",
+      "source": {
+        "ref": "zhouyi",
+        "section": "乾卦卦画"
+      },
+      "answer_evidence": "标准卦画为乾下乾上。"
+    },
+    "iching-practice-191": {
+      "topic": "hexagram_structure",
+      "answer": "false",
+      "source": {
+        "ref": "zhouyi",
+        "section": "夬卦卦画"
+      },
+      "answer_evidence": "标准卦画为乾下兑上。"
+    },
+    "iching-practice-192": {
+      "topic": "hexagram_structure",
+      "answer": "true",
+      "source": {
+        "ref": "zhouyi",
+        "section": "大有卦卦画"
+      },
+      "answer_evidence": "标准卦画为乾下离上。"
+    },
+    "iching-practice-193": {
+      "topic": "hexagram_structure",
+      "answer": "false",
+      "source": {
+        "ref": "zhouyi",
+        "section": "大壮卦卦画"
+      },
+      "answer_evidence": "标准卦画为乾下震上。"
+    },
+    "iching-practice-194": {
+      "topic": "hexagram_structure",
+      "answer": "true",
+      "source": {
+        "ref": "zhouyi",
+        "section": "小畜卦卦画"
+      },
+      "answer_evidence": "标准卦画为乾下巽上。"
+    },
+    "iching-practice-195": {
+      "topic": "hexagram_structure",
+      "answer": "false",
+      "source": {
+        "ref": "zhouyi",
+        "section": "需卦卦画"
+      },
+      "answer_evidence": "标准卦画为乾下坎上。"
+    },
+    "iching-practice-196": {
+      "topic": "hexagram_structure",
+      "answer": "true",
+      "source": {
+        "ref": "zhouyi",
+        "section": "大畜卦卦画"
+      },
+      "answer_evidence": "标准卦画为乾下艮上。"
+    },
+    "iching-practice-197": {
+      "topic": "hexagram_structure",
+      "answer": "false",
+      "source": {
+        "ref": "zhouyi",
+        "section": "泰卦卦画"
+      },
+      "answer_evidence": "标准卦画为乾下坤上。"
+    },
+    "iching-practice-198": {
+      "topic": "hexagram_structure",
+      "answer": "true",
+      "source": {
+        "ref": "zhouyi",
+        "section": "履卦卦画"
+      },
+      "answer_evidence": "标准卦画为兑下乾上。"
+    },
+    "iching-practice-199": {
+      "topic": "hexagram_structure",
+      "answer": "false",
+      "source": {
+        "ref": "zhouyi",
+        "section": "兑卦卦画"
+      },
+      "answer_evidence": "标准卦画为兑下兑上。"
+    },
+    "iching-practice-200": {
+      "topic": "hexagram_structure",
+      "answer": "true",
+      "source": {
+        "ref": "zhouyi",
+        "section": "睽卦卦画"
+      },
+      "answer_evidence": "标准卦画为兑下离上。"
+    },
+    "iching-practice-201": {
+      "topic": "hexagram_structure",
+      "answer": "false",
+      "source": {
+        "ref": "zhouyi",
+        "section": "归妹卦卦画"
+      },
+      "answer_evidence": "标准卦画为兑下震上。"
+    },
+    "iching-practice-202": {
+      "topic": "hexagram_structure",
+      "answer": "true",
+      "source": {
+        "ref": "zhouyi",
+        "section": "中孚卦卦画"
+      },
+      "answer_evidence": "标准卦画为兑下巽上。"
+    },
+    "iching-practice-203": {
+      "topic": "hexagram_structure",
+      "answer": "false",
+      "source": {
+        "ref": "zhouyi",
+        "section": "节卦卦画"
+      },
+      "answer_evidence": "标准卦画为兑下坎上。"
+    },
+    "iching-practice-204": {
+      "topic": "hexagram_structure",
+      "answer": "true",
+      "source": {
+        "ref": "zhouyi",
+        "section": "损卦卦画"
+      },
+      "answer_evidence": "标准卦画为兑下艮上。"
+    },
+    "iching-practice-205": {
+      "topic": "hexagram_structure",
+      "answer": "false",
+      "source": {
+        "ref": "zhouyi",
+        "section": "临卦卦画"
+      },
+      "answer_evidence": "标准卦画为兑下坤上。"
+    },
+    "iching-practice-206": {
+      "topic": "hexagram_structure",
+      "answer": "true",
+      "source": {
+        "ref": "zhouyi",
+        "section": "同人卦卦画"
+      },
+      "answer_evidence": "标准卦画为离下乾上。"
+    },
+    "iching-practice-207": {
+      "topic": "hexagram_structure",
+      "answer": "false",
+      "source": {
+        "ref": "zhouyi",
+        "section": "革卦卦画"
+      },
+      "answer_evidence": "标准卦画为离下兑上。"
+    },
+    "iching-practice-208": {
+      "topic": "hexagram_structure",
+      "answer": "true",
+      "source": {
+        "ref": "zhouyi",
+        "section": "离卦卦画"
+      },
+      "answer_evidence": "标准卦画为离下离上。"
+    },
+    "iching-practice-209": {
+      "topic": "hexagram_structure",
+      "answer": "false",
+      "source": {
+        "ref": "zhouyi",
+        "section": "丰卦卦画"
+      },
+      "answer_evidence": "标准卦画为离下震上。"
+    },
+    "iching-practice-210": {
+      "topic": "hexagram_structure",
+      "answer": "true",
+      "source": {
+        "ref": "zhouyi",
+        "section": "家人卦卦画"
+      },
+      "answer_evidence": "标准卦画为离下巽上。"
+    },
+    "iching-practice-211": {
+      "topic": "hexagram_structure",
+      "answer": "false",
+      "source": {
+        "ref": "zhouyi",
+        "section": "既济卦卦画"
+      },
+      "answer_evidence": "标准卦画为离下坎上。"
+    },
+    "iching-practice-212": {
+      "topic": "hexagram_structure",
+      "answer": "true",
+      "source": {
+        "ref": "zhouyi",
+        "section": "贲卦卦画"
+      },
+      "answer_evidence": "标准卦画为离下艮上。"
+    },
+    "iching-practice-213": {
+      "topic": "hexagram_structure",
+      "answer": "false",
+      "source": {
+        "ref": "zhouyi",
+        "section": "明夷卦卦画"
+      },
+      "answer_evidence": "标准卦画为离下坤上。"
+    },
+    "iching-practice-214": {
+      "topic": "hexagram_structure",
+      "answer": "true",
+      "source": {
+        "ref": "zhouyi",
+        "section": "无妄卦卦画"
+      },
+      "answer_evidence": "标准卦画为震下乾上。"
+    },
+    "iching-practice-215": {
+      "topic": "hexagram_structure",
+      "answer": "false",
+      "source": {
+        "ref": "zhouyi",
+        "section": "随卦卦画"
+      },
+      "answer_evidence": "标准卦画为震下兑上。"
+    },
+    "iching-practice-216": {
+      "topic": "hexagram_structure",
+      "answer": "true",
+      "source": {
+        "ref": "zhouyi",
+        "section": "噬嗑卦卦画"
+      },
+      "answer_evidence": "标准卦画为震下离上。"
+    },
+    "iching-practice-217": {
+      "topic": "hexagram_structure",
+      "answer": "false",
+      "source": {
+        "ref": "zhouyi",
+        "section": "震卦卦画"
+      },
+      "answer_evidence": "标准卦画为震下震上。"
+    },
+    "iching-practice-218": {
+      "topic": "hexagram_structure",
+      "answer": "true",
+      "source": {
+        "ref": "zhouyi",
+        "section": "益卦卦画"
+      },
+      "answer_evidence": "标准卦画为震下巽上。"
+    },
+    "iching-practice-219": {
+      "topic": "hexagram_structure",
+      "answer": "false",
+      "source": {
+        "ref": "zhouyi",
+        "section": "屯卦卦画"
+      },
+      "answer_evidence": "标准卦画为震下坎上。"
+    },
+    "iching-practice-220": {
+      "topic": "hexagram_structure",
+      "answer": "true",
+      "source": {
+        "ref": "zhouyi",
+        "section": "颐卦卦画"
+      },
+      "answer_evidence": "标准卦画为震下艮上。"
+    },
+    "iching-practice-221": {
+      "topic": "hexagram_structure",
+      "answer": "false",
+      "source": {
+        "ref": "zhouyi",
+        "section": "复卦卦画"
+      },
+      "answer_evidence": "标准卦画为震下坤上。"
+    },
+    "iching-practice-222": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦相错"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-223": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "shuogua",
+        "section": "八卦相错"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-224": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "shuogua",
+        "section": "首章"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-225": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "shuogua",
+        "section": "首章"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-226": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "xici1",
+        "section": "道与性"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-227": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "xici1",
+        "section": "道与性"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-228": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "xici1",
+        "section": "太极"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-229": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "xici1",
+        "section": "太极"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-230": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "xici1",
+        "section": "生生之谓易"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-231": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "xici1",
+        "section": "生生之谓易"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-232": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "xici2",
+        "section": "穷变通久"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-233": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "xici2",
+        "section": "穷变通久"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-234": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "xici1",
+        "section": "类聚群分"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-235": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "xici1",
+        "section": "类聚群分"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-236": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "xici1",
+        "section": "同心"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-237": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "xici1",
+        "section": "同心"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-238": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "xici1",
+        "section": "藏器待时"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-239": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "xici1",
+        "section": "藏器待时"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-240": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "xici2",
+        "section": "取象"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-241": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "xici2",
+        "section": "取象"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-242": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "xici1",
+        "section": "天地之道"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-243": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "xici1",
+        "section": "天地之道"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-244": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "xici1",
+        "section": "刚柔变化"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-245": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "xici1",
+        "section": "刚柔变化"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-246": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "xici1",
+        "section": "变化"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-247": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "xici1",
+        "section": "变化"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-248": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "xici1",
+        "section": "八卦成列"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-249": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "xici1",
+        "section": "八卦成列"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-250": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "xici1",
+        "section": "立象尽意"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-251": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "xici1",
+        "section": "立象尽意"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-252": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "xici1",
+        "section": "辞"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-253": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "xici1",
+        "section": "辞"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-254": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "xici2",
+        "section": "易之兴"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-255": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "xici2",
+        "section": "易之兴"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-256": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "xugua",
+        "section": "序卦首段"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-257": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "xugua",
+        "section": "序卦首段"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-258": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "zagua",
+        "section": "乾坤"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-259": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "zagua",
+        "section": "乾坤"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-260": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "zagua",
+        "section": "比师"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-261": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "zagua",
+        "section": "比师"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-262": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "zagua",
+        "section": "临观"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-263": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "zagua",
+        "section": "临观"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-264": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "wenyan",
+        "section": "积善积恶"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-265": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "wenyan",
+        "section": "积善积恶"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-266": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "wenyan",
+        "section": "同声同气"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-267": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "wenyan",
+        "section": "同声同气"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-268": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "wenyan",
+        "section": "初九"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-269": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "wenyan",
+        "section": "初九"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-270": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "wenyan",
+        "section": "君子学问"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-271": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "wenyan",
+        "section": "君子学问"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-272": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "shuogua",
+        "section": "乾取象"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-273": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "shuogua",
+        "section": "乾取象"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-274": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "shuogua",
+        "section": "坤取象"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-275": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "shuogua",
+        "section": "坤取象"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-276": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "shuogua",
+        "section": "震取象"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-277": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "shuogua",
+        "section": "震取象"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-278": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "shuogua",
+        "section": "巽取象"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-279": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "shuogua",
+        "section": "巽取象"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-280": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "shuogua",
+        "section": "坎取象"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-281": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "shuogua",
+        "section": "坎取象"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-282": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "shuogua",
+        "section": "离取象"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-283": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "shuogua",
+        "section": "离取象"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-284": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "shuogua",
+        "section": "艮取象"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-285": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "shuogua",
+        "section": "艮取象"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-286": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "shuogua",
+        "section": "兑取象"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-287": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "shuogua",
+        "section": "兑取象"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-288": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "shuogua",
+        "section": "乾坤德性"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-289": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "shuogua",
+        "section": "乾坤德性"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-290": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "shuogua",
+        "section": "震巽德性"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-291": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "shuogua",
+        "section": "震巽德性"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-292": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "shuogua",
+        "section": "坎离德性"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-293": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "shuogua",
+        "section": "坎离德性"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-294": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "shuogua",
+        "section": "艮兑德性"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-295": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "shuogua",
+        "section": "艮兑德性"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-296": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "shuogua",
+        "section": "帝出乎震"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-297": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "shuogua",
+        "section": "帝出乎震"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-298": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "shuogua",
+        "section": "坎方位"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-299": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "false",
+      "source": {
+        "ref": "shuogua",
+        "section": "坎方位"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    },
+    "iching-practice-300": {
+      "topic": "ten_wings_and_yi_principles",
+      "answer": "true",
+      "source": {
+        "ref": "shuogua",
+        "section": "离明"
+      },
+      "answer_evidence": "逐句对照随附固定版本的篇章原文。"
+    }
+  },
+  "generated_file_sha256": "eabbc8bab3c358c6a5c9fab01794d43977c755cd9d566f7d2bae92ee64b8b7ee",
+  "supersedes_local_dataset_id": "ds-eval-upload-e084610fbfbcfe252c90",
+  "supersession_reason": "Replaced one near-duplicate item that overlapped the held-out Da Yan number question; v1 remains registered because the current UI has no deletion operation.",
+  "registration": {
+    "dataset_id": "ds-eval-upload-14aee30e5c7ec6ec0959",
+    "record_count": 300,
+    "original_sha256": "eabbc8bab3c358c6a5c9fab01794d43977c755cd9d566f7d2bae92ee64b8b7ee",
+    "canonical_sha256": "361c56f60059392c82e092762121c6ef50d53496dc0f6902cdd330f304b2c0be",
+    "role": "evaluation_only",
+    "source_license_status": "user_declared_unverified",
+    "lineage_validation": "valid"
+  }
+}

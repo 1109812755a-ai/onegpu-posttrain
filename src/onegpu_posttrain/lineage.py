@@ -100,13 +100,14 @@ class QualityReportLineage(LineageModel):
 class ModelLineage(LineageModel):
     lineage_schema_version: Literal["1.0"] = LINEAGE_SCHEMA_VERSION
     model_id: str
-    kind: Literal["base", "adapter", "merged"]
+    kind: Literal["base", "adapter", "merged", "weight_space_candidate"]
     path: str | None = None
     digest: Digest
     parent_model_ids: list[str] = Field(default_factory=list)
     adapter_id: str | None = None
     produced_by_run_id: str | None = None
     stage: str | None = None
+    edit_artifact_path: str | None = None
 
 
 class EvaluationLineage(LineageModel):
@@ -123,6 +124,18 @@ class EvaluationLineage(LineageModel):
     config_sha256: str | None = Field(default=None, pattern=r"^[0-9a-f]{64}$")
     status: Literal["completed", "failed", "partial"]
     metrics: dict[str, dict[str, Any]] = Field(default_factory=dict)
+    experiment_id: str | None = None
+    iteration: int | None = Field(default=None, ge=0)
+    dataset_role: Literal["practice", "final_holdout"] | None = None
+    candidate_id: str | None = None
+    candidate_sha256: str | None = Field(default=None, pattern=r"^[0-9a-f]{64}$")
+    parent_candidate_sha256: str | None = Field(default=None, pattern=r"^[0-9a-f]{64}$")
+    target_model_revision: str | None = None
+    processor_sha256: str | None = Field(default=None, pattern=r"^[0-9a-f]{64}$")
+    runtime_image: str | None = None
+    runtime_versions: dict[str, str] = Field(default_factory=dict)
+    inference_config: dict[str, Any] = Field(default_factory=dict)
+    comparison_identity: str | None = Field(default=None, pattern=r"^[0-9a-f]{64}$")
 
     @model_validator(mode="after")
     def validate_targeted_plan_identity(self):

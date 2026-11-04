@@ -24,6 +24,7 @@ htmlcov/
 data/raw/
 data/processed/
 data/generated/*.jsonl
+!data/generated/weight-space-practice-iching-300.jsonl
 artifacts/
 runs/
 checkpoints/

@@ -18,7 +18,7 @@ from pathlib import Path
 import yaml
 from fastapi import FastAPI, Header, HTTPException, Query, Request
 from fastapi.responses import FileResponse, JSONResponse, Response
-from pydantic import ValidationError
+from pydantic import BaseModel, ValidationError
 from starlette.concurrency import run_in_threadpool
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
@@ -76,6 +76,31 @@ from .training_preflight import (
     preflight_stage,
     stage_workbench_options,
 )
+from ..assistant.api import AssistantAskRequest, AssistantProfileDraftRequest, AssistantProfileRequest, ContextSummaryRequest, MemoryDraftRequest
+from ..assistant.context import rebuild_context_summary
+from ..assistant.contracts import ContextSummary, WorkspaceMemory
+from ..assistant.evaluation import PlatformFixtureHarness, evaluate_harness, load_mvp_cases
+from ..assistant.evidence_reader import WorkspaceEvidenceReader
+from ..assistant.agentscope_runtime import AgentScopeRuntime
+from ..assistant.langfuse_observer import LangfuseObserver
+from ..assistant.model_adapter import BailianAssistantModelAdapter
+from ..assistant.profiles import AssistantProfileCatalog, draft_profile_from_description
+from ..assistant.service import WorkspaceAssistantService
+from ..assistant.store import WorkspaceAssistantStore
+from ..weight_space.workbench import WeightSpaceWorkbench
+
+
+class WeightSpaceStartRequest(BaseModel):
+    confirmation_token: str
+
+
+class WeightSpaceCandidateRequest(BaseModel):
+    candidate_id: str
+
+
+class WeightSpaceTransitionRequest(BaseModel):
+    candidate_id: str
+    action: str
 
 
 def _aggregate_choice_report_metrics(rows: list[dict]) -> dict[str, dict]:
@@ -125,6 +150,21 @@ def create_app(
     run_workspace = RunWorkspace(workspace)
     model_playground_catalog = ModelPlaygroundCatalog(workspace)
     model_display_names = ModelDisplayNameStore(workspace)
+    assistant_store = WorkspaceAssistantStore(workspace)
+    assistant_profiles = AssistantProfileCatalog(assistant_store)
+    assistant_observer = LangfuseObserver(workspace)
+    assistant_model = BailianAssistantModelAdapter(workspace)
+    assistant_runtime_name = os.environ.get("ONEGPU_ASSISTANT_RUNTIME", "agentscope").strip().lower()
+    if assistant_runtime_name not in {"legacy", "agentscope"}:
+        raise ValueError("ONEGPU_ASSISTANT_RUNTIME 只支持 agentscope 或 legacy")
+    assistant_service = WorkspaceAssistantService(
+        store=assistant_store,
+        evidence_reader=WorkspaceEvidenceReader(workspace, catalog=catalog),
+        profiles=assistant_profiles,
+        model=assistant_model,
+        observer=assistant_observer,
+        agent_runtime=AgentScopeRuntime(workspace, assistant_model) if assistant_runtime_name == "agentscope" else None,
+    )
     choice_retry_lock = threading.RLock()
 
     @asynccontextmanager
@@ -152,6 +192,8 @@ def create_app(
     app = FastAPI(title="OneGPU PostTrain · Data", docs_url=None, redoc_url=None, openapi_url=None,
                   lifespan=lifespan)
     app.state.catalog = catalog
+    app.state.assistant_service = assistant_service
+    app.state.assistant_observer = assistant_observer
     app.state.policy_editor_enabled = enable_policy_editor
     app.state.policy_editor_token = secrets.token_urlsafe(32) if enable_policy_editor else None
     app.state.policy_preview_lock = threading.Lock()
@@ -166,6 +208,7 @@ def create_app(
     app.state.model_playground_jobs = (ModelPlaygroundJobs(workspace, model_playground_catalog)
                                        if enable_experiment_launcher and not allow_remote else None)
     app.state.synthetic_generation_token = secrets.token_urlsafe(32) if enable_synthetic_generation else None
+    app.state.weight_space_workbench = WeightSpaceWorkbench(workspace) if enable_experiment_launcher and not allow_remote else None
     app.state.stage_preflight_confirmations = StagePreflightConfirmations()
     app.state.stage_training = (RegisteredStageTraining(
         workspace, app.state.experiment_launcher, app.state.stage_preflight_confirmations,
@@ -175,9 +218,10 @@ def create_app(
 
     @app.middleware("http")
     async def read_only_headers(request, call_next):
-        if request.url.path.startswith(("/api/launcher/", "/api/synthetic/sft/", "/api/synthetic/cpt/", "/api/synthetic/preference/", "/api/synthetic/grpo/", "/api/training/", "/api/data/mixtures/", "/api/model-playground/")) and request.method == "POST":
+        if request.url.path.startswith(("/api/assistant/", "/api/launcher/", "/api/synthetic/sft/", "/api/synthetic/cpt/", "/api/synthetic/preference/", "/api/synthetic/grpo/", "/api/training/", "/api/data/mixtures/", "/api/model-playground/", "/api/weight-space/")) and request.method == "POST":
             try:
-                limit = (72 * 1024 if request.url.path.startswith("/api/model-playground/") else
+                limit = (16 * 1024 if request.url.path.startswith("/api/assistant/") else
+                         72 * 1024 if request.url.path.startswith("/api/model-playground/") else
                          96 * 1024 if request.url.path == "/api/synthetic/preference/prepare" else
                          40 * 1024 if request.url.path == "/api/synthetic/grpo/prepare" else 4096)
                 if int(request.headers.get("content-length", "0")) > limit:
@@ -197,6 +241,307 @@ def create_app(
     @app.get("/api/health")
     def health():
         return {"status": "ok", "read_only": not (enable_policy_editor or enable_experiment_launcher or enable_synthetic_generation), "page": "data", "api_version": "1"}
+
+    def local_weight_space(request: Request) -> WeightSpaceWorkbench:
+        service = app.state.weight_space_workbench
+        if service is None:
+            raise HTTPException(403, "权重空间工作台仅在本机 Launcher 模式可用")
+        client_host = request.client.host if request.client else ""
+        try:
+            client_ok = ipaddress.ip_address(client_host).is_loopback
+        except ValueError:
+            client_ok = client_host in {"testclient", "localhost"}
+        try:
+            host_ok = ipaddress.ip_address(request.url.hostname or "").is_loopback
+        except ValueError:
+            host_ok = (request.url.hostname or "").lower() in {"localhost", "testserver"}
+        if not client_ok or not host_ok:
+            raise HTTPException(403, "权重空间工作台仅接受 loopback 本机请求")
+        return service
+
+    @app.get("/api/weight-space/status")
+    def weight_space_status(request: Request):
+        return local_weight_space(request).snapshot()
+
+    @app.post("/api/weight-space/iteration/preflight")
+    def weight_space_preflight(request: Request):
+        try:
+            return local_weight_space(request).preflight()
+        except (ValueError, OSError) as exc:
+            raise HTTPException(409, str(exc)[:240]) from exc
+
+    @app.post("/api/weight-space/iteration/start", status_code=202)
+    def weight_space_start(request: Request, body: WeightSpaceStartRequest):
+        try:
+            return local_weight_space(request).start_iteration(body.confirmation_token)
+        except ValueError as exc:
+            raise HTTPException(409, str(exc)[:240]) from exc
+
+    @app.post("/api/weight-space/candidates/final", status_code=202)
+    def weight_space_final(request: Request, body: WeightSpaceCandidateRequest):
+        try:
+            return local_weight_space(request).start_final(body.candidate_id)
+        except (ValueError, OSError) as exc:
+            raise HTTPException(409, str(exc)[:240]) from exc
+
+    @app.post("/api/weight-space/candidates/transition")
+    def weight_space_transition(request: Request, body: WeightSpaceTransitionRequest):
+        try:
+            return local_weight_space(request).transition(body.candidate_id, body.action)
+        except (ValueError, OSError) as exc:
+            raise HTTPException(409, str(exc)[:240]) from exc
+
+    def require_local_assistant_request(request: Request) -> None:
+        host = request.client.host if request.client else ""
+        try:
+            local = ipaddress.ip_address(host).is_loopback
+        except ValueError:
+            local = host in {"testclient", "localhost"}
+        if not local:
+            raise HTTPException(403, "工作区助手仅接受本机请求")
+        origin = request.headers.get("origin")
+        if origin and origin.rstrip("/") != str(request.base_url).rstrip("/"):
+            raise HTTPException(403, "工作区助手仅接受同源请求")
+
+    @app.get("/api/assistant/status")
+    def assistant_status(request: Request, session_id: str | None = None):
+        require_local_assistant_request(request)
+        session = assistant_store.get_session(session_id) if session_id else None
+        return {
+            "provider": "阿里云百炼",
+            "runtime": assistant_runtime_name,
+            "model_profile_id": "dashscope-qwen3.6-plus-local",
+            "provider_configured": assistant_service.model.is_configured(),
+            "data_egress_consent": bool(session and session.data_egress_consent_at),
+            "data_egress_consent_at": session.data_egress_consent_at.isoformat() if session and session.data_egress_consent_at else None,
+            "read_only": True,
+            "observability": assistant_observer.status(),
+        }
+
+    @app.get("/api/assistant/observability")
+    def assistant_observability_status(request: Request):
+        require_local_assistant_request(request)
+        return assistant_observer.status()
+
+    @app.post("/api/assistant/observability/check")
+    def assistant_observability_check(request: Request):
+        require_local_assistant_request(request)
+        return assistant_observer.check_connection()
+
+    @app.get("/api/assistant/profiles")
+    def assistant_list_profiles(request: Request):
+        require_local_assistant_request(request)
+        return [item.model_dump(mode="json") for item in assistant_profiles.list_profiles()]
+
+    @app.post("/api/assistant/profiles/draft")
+    def assistant_profile_draft(body: AssistantProfileDraftRequest, request: Request):
+        require_local_assistant_request(request)
+        try:
+            return {"draft": draft_profile_from_description(body.description), "saved": False,
+                    "capabilities": "仅允许现有只读工作区证据"}
+        except ValueError as exc:
+            raise HTTPException(422, str(exc)) from exc
+
+    @app.post("/api/assistant/profiles")
+    def assistant_create_profile(body: AssistantProfileRequest, request: Request):
+        require_local_assistant_request(request)
+        try:
+            return assistant_profiles.create(body.name, body.role_instruction).model_dump(mode="json")
+        except ValueError as exc:
+            raise HTTPException(422, str(exc)) from exc
+
+    @app.put("/api/assistant/profiles/{profile_id}")
+    def assistant_update_profile(profile_id: str, body: AssistantProfileRequest, request: Request):
+        require_local_assistant_request(request)
+        try:
+            return assistant_profiles.update(
+                profile_id, name=body.name, role_instruction=body.role_instruction,
+            ).model_dump(mode="json")
+        except KeyError as exc:
+            raise HTTPException(404, "助手配置不存在") from exc
+        except ValueError as exc:
+            raise HTTPException(422, str(exc)) from exc
+
+    @app.delete("/api/assistant/profiles/{profile_id}")
+    def assistant_delete_profile(profile_id: str, request: Request):
+        require_local_assistant_request(request)
+        try:
+            if not assistant_profiles.delete(profile_id):
+                raise HTTPException(404, "助手配置不存在")
+            return {"deleted": True}
+        except ValueError as exc:
+            raise HTTPException(422, str(exc)) from exc
+
+    @app.get("/api/assistant/memories")
+    def assistant_list_memories(request: Request):
+        require_local_assistant_request(request)
+        return [item.model_dump(mode="json") for item in assistant_store.list_memories()]
+
+    @app.post("/api/assistant/memories/draft")
+    def assistant_memory_draft(body: MemoryDraftRequest, request: Request):
+        require_local_assistant_request(request)
+        try:
+            draft = WorkspaceMemory(
+                memory_id=f"memory-{secrets.token_hex(10)}", content=body.content,
+                status="active", created_at=datetime.now(timezone.utc),
+                updated_at=datetime.now(timezone.utc),
+            )
+        except ValidationError as exc:
+            raise HTTPException(422, "记忆草稿无效") from exc
+        return {"draft": draft.model_dump(mode="json"), "saved": False, "confirmation_required": True}
+
+    @app.post("/api/assistant/memories")
+    def assistant_save_memory(body: MemoryDraftRequest, request: Request):
+        require_local_assistant_request(request)
+        try:
+            memory = WorkspaceMemory(
+                memory_id=f"memory-{secrets.token_hex(10)}", content=body.content,
+                status="active", created_at=datetime.now(timezone.utc),
+                updated_at=datetime.now(timezone.utc),
+            )
+            return assistant_store.save_memory(memory).model_dump(mode="json")
+        except ValidationError as exc:
+            raise HTTPException(422, "记忆内容无效") from exc
+
+    @app.put("/api/assistant/memories/{memory_id}")
+    def assistant_update_memory(memory_id: str, body: MemoryDraftRequest, request: Request):
+        require_local_assistant_request(request)
+        current = next((item for item in assistant_store.list_memories() if item.memory_id == memory_id), None)
+        if current is None:
+            raise HTTPException(404, "工作区记忆不存在")
+        try:
+            updated = current.model_copy(update={"content": body.content, "updated_at": datetime.now(timezone.utc)})
+            updated = WorkspaceMemory.model_validate(updated.model_dump())
+            return assistant_store.save_memory(updated).model_dump(mode="json")
+        except ValidationError as exc:
+            raise HTTPException(422, "记忆内容无效") from exc
+
+    @app.patch("/api/assistant/memories/{memory_id}/status")
+    def assistant_set_memory_status(memory_id: str, enabled: bool, request: Request):
+        require_local_assistant_request(request)
+        current = next((item for item in assistant_store.list_memories() if item.memory_id == memory_id), None)
+        if current is None:
+            raise HTTPException(404, "工作区记忆不存在")
+        updated = current.model_copy(update={
+            "status": "active" if enabled else "disabled",
+            "updated_at": datetime.now(timezone.utc),
+        })
+        return assistant_store.save_memory(updated).model_dump(mode="json")
+
+    @app.delete("/api/assistant/memories/{memory_id}")
+    def assistant_delete_memory(memory_id: str, request: Request):
+        require_local_assistant_request(request)
+        if not assistant_store.delete_memory(memory_id):
+            raise HTTPException(404, "工作区记忆不存在")
+        return {"deleted": True}
+
+    @app.get("/api/assistant/sessions")
+    def assistant_list_sessions(request: Request, limit: int = 50):
+        require_local_assistant_request(request)
+        return [{
+            "session_id": item.session_id, "title": item.title,
+            "assistant_profile_id": item.assistant_profile_id,
+            "updated_at": item.updated_at.isoformat(),
+            "data_egress_consent_at": item.data_egress_consent_at.isoformat() if item.data_egress_consent_at else None,
+        } for item in assistant_store.list_sessions(limit)]
+
+    @app.get("/api/assistant/tasks")
+    def assistant_list_tasks(request: Request, session_id: str | None = None, limit: int = 50):
+        require_local_assistant_request(request)
+        return [item.model_dump(mode="json") for item in assistant_store.list_tasks(
+            session_id=session_id, limit=limit,
+        )]
+
+    @app.get("/api/assistant/evaluations")
+    def assistant_list_evaluations(request: Request, limit: int = 20):
+        require_local_assistant_request(request)
+        return assistant_store.list_evaluation_reports(limit)
+
+    @app.post("/api/assistant/evaluations/reference")
+    def assistant_run_reference_evaluation(request: Request):
+        require_local_assistant_request(request)
+        report = evaluate_harness(
+            PlatformFixtureHarness.harness_id,
+            PlatformFixtureHarness(),
+            load_mvp_cases(),
+            configuration_id=PlatformFixtureHarness.configuration_id,
+        )
+        assistant_store.save_evaluation_report(report)
+        return report.model_dump(mode="json")
+
+    @app.get("/api/assistant/sessions/{session_id}")
+    def assistant_get_session(session_id: str, request: Request):
+        require_local_assistant_request(request)
+        session = assistant_store.get_session(session_id)
+        if session is None:
+            raise HTTPException(404, "助手会话不存在")
+        return session.model_dump(mode="json")
+
+    @app.get("/api/assistant/sessions/{session_id}/summary")
+    def assistant_get_context_summary(session_id: str, request: Request):
+        require_local_assistant_request(request)
+        if assistant_store.get_session(session_id) is None:
+            raise HTTPException(404, "助手会话不存在")
+        summary = assistant_store.get_summary(session_id)
+        return summary.model_dump(mode="json") if summary else None
+
+    @app.post("/api/assistant/sessions/{session_id}/summary/rebuild")
+    def assistant_rebuild_context_summary(session_id: str, request: Request):
+        require_local_assistant_request(request)
+        session = assistant_store.get_session(session_id)
+        if session is None:
+            raise HTTPException(404, "助手会话不存在")
+        summary = rebuild_context_summary(session, assistant_store.get_summary(session_id))
+        if summary is None:
+            raise HTTPException(409, "对话尚未达到上下文压缩条件")
+        return assistant_store.save_summary(summary).model_dump(mode="json")
+
+    @app.put("/api/assistant/sessions/{session_id}/summary")
+    def assistant_edit_context_summary(session_id: str, body: ContextSummaryRequest, request: Request):
+        require_local_assistant_request(request)
+        current = assistant_store.get_summary(session_id)
+        if current is None:
+            raise HTTPException(404, "上下文摘要不存在")
+        try:
+            updated = current.model_copy(update={"summary": body.summary, "updated_at": datetime.now(timezone.utc)})
+            updated = ContextSummary.model_validate(updated.model_dump())
+            return assistant_store.save_summary(updated).model_dump(mode="json")
+        except ValidationError as exc:
+            raise HTTPException(422, "摘要内容无效") from exc
+
+    @app.post("/api/assistant/sessions/{session_id}/consent")
+    def assistant_confirm_consent(session_id: str, request: Request):
+        require_local_assistant_request(request)
+        try:
+            session = assistant_service.confirm_data_egress(session_id)
+        except KeyError as exc:
+            raise HTTPException(404, "助手会话不存在") from exc
+        return {
+            "session_id": session.session_id,
+            "data_egress_consent": True,
+            "consent_at": session.data_egress_consent_at.isoformat(),
+            "consent_version": session.data_egress_consent_version,
+        }
+
+    @app.post("/api/assistant/ask")
+    def assistant_ask(body: AssistantAskRequest, request: Request):
+        require_local_assistant_request(request)
+        try:
+            result = assistant_service.ask(
+                body.question, session_id=body.session_id,
+                assistant_profile_id=body.assistant_profile_id,
+            )
+        except KeyError as exc:
+            raise HTTPException(404, "助手会话不存在") from exc
+        except ValueError as exc:
+            raise HTTPException(422, str(exc)) from exc
+        return {
+            "task": result.task.model_dump(mode="json"),
+            "answer": result.answer.model_dump(mode="json") if result.answer else None,
+            "evidence": [item.model_dump(mode="json") for item in result.evidence],
+            "comparisons": [item.model_dump(mode="json") for item in result.comparisons],
+            "consent_required": result.consent_required,
+        }
 
     @app.get("/api/runs")
     def runs_index(stage: str | None = None, status: str | None = None, q: str | None = None,

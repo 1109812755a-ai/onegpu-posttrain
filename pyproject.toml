@@ -25,6 +25,15 @@ ui-test = [
   "uvicorn==0.54.0",
   "httpx==0.28.1",
 ]
+assistant-observability = [
+  "langfuse>=4.7.0,<5",
+]
+assistant-agentscope = [
+  "agentscope==1.0.21",
+  "mcp>=1.13,<2",
+  "tqdm>=4,<5",
+  "sqlalchemy[asyncio]>=2,<3",
+]
 data = [
   "datasets>=3,<5",
   "transformers>=4.51,<5",

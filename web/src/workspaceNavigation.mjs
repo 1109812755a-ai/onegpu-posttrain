@@ -4,10 +4,12 @@ const PAGE_MODULE = {
   policies: "data",
   launcher: "training",
   "model-playground": "training",
+  "weight-space": "training",
   runs: "runs",
   comparison: "analysis",
   "policy-effects": "analysis",
   targeted: "analysis",
+  assistant: "assistant",
 };
 
 const HANDOFF_KEYS = ["dataset_id", "model_id", "run_id", "eval_id", "report_id", "experiment_id", "scenario_id", "plan_id", "bundle_id", "return_to", "stage"];
@@ -54,6 +56,7 @@ export function moduleDefaultPage(module) {
     training: "launcher",
     runs: "runs",
     analysis: "comparison",
+    assistant: "assistant",
   }[module] || "workbench";
 }
 

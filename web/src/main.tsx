@@ -7,8 +7,10 @@ import { EvaluationMatrixPage } from "./EvaluationMatrixPage";
 import { Launcher } from "./Launcher";
 import { Runs } from "./Runs";
 import { ModelPlayground } from "./ModelPlayground";
+import { WeightSpaceWorkbench } from "./WeightSpaceWorkbench";
 import { DatasetWorkbench } from "./DatasetWorkbench";
 import { ActivityTasks } from "./ActivityTasks";
+import { WorkspaceAssistant } from "./WorkspaceAssistant";
 import { ThemePreferenceControl } from "./ThemePreferenceControl";
 import { MODULE_VIEWS, PRIMARY_MODULES, WorkspaceNavigation } from "./WorkspaceNavigation.tsx";
 import { grpoPreparationSearch, isNavigationCurrent, launcherReturnSearch, navigationTarget, registeredDatasetTrainingSearch, workspaceModuleFromPage, workspaceRouteStateFromSearch, workspaceSearchForPage } from "./workspaceNavigation.mjs";
@@ -107,10 +109,12 @@ const PAGE_LABELS: Record<string, string> = {
   policies: "规则对照",
   launcher: "训练与评测",
   "model-playground": "模型体验",
+  "weight-space": "权重空间实验",
   runs: "运行记录",
   comparison: "阶段比较",
   "policy-effects": "策略效果",
   targeted: "薄弱场景",
+  assistant: "实验助手",
 };
 const TABS = [
   { id: "flow", label: "处理流程" },
@@ -166,6 +170,7 @@ function Icon({ name, size = 18 }: { name: string; size?: number }) {
     check: "M5 12l4 4L19 6",
     beaker: "M8 3h8 M9 3v6L4 18a2 2 0 002 3h12a2 2 0 002-3l-5-9V3 M7 14h10",
     box: "M3 7l9-4 9 4v11l-9 4-9-4z M3 7l9 4 9-4 M12 11v11",
+    chat: "M21 11.5a8.4 8.4 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.4 8.4 0 01-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 01-.9-3.8A8.5 8.5 0 018.7 3.9a8.4 8.4 0 013.8-.9h.5a8.5 8.5 0 018 8z",
   };
   return (
     <svg
@@ -944,7 +949,7 @@ function App() {
   const [detail, setDetail] = useState<BuildDetail | null>(null);
   const [detailError, setDetailError] = useState("");
   const [artifact, setArtifact] = useState<Artifact | null>(null);
-  const [page, setPage] = useState<"data" | "comparison" | "policy-effects" | "policies" | "targeted" | "launcher" | "model-playground" | "runs" | "workbench">(() => {
+  const [page, setPage] = useState<"data" | "comparison" | "policy-effects" | "policies" | "targeted" | "launcher" | "model-playground" | "weight-space" | "runs" | "workbench" | "assistant">(() => {
     return initial.page;
   });
   useEffect(() => {
@@ -1125,7 +1130,7 @@ function App() {
   const currentModule = workspaceModuleFromPage(page);
   const currentPageDataError = page === "data" && Boolean(error);
   const currentModuleName = PRIMARY_MODULES.find((item) => item.module === currentModule)?.name || "数据";
-  const currentModuleViews = MODULE_VIEWS[currentModule];
+  const currentModuleViews = MODULE_VIEWS[currentModule as keyof typeof MODULE_VIEWS] || [];
   return (
     <div className="app-shell" data-theme={effectiveTheme}>
       <aside className="sidebar">
@@ -1561,7 +1566,9 @@ function App() {
         {page === "targeted" && <TargetedExperiments />}
         {page === "launcher" && <Launcher onBack={returnToWorkspaceOrigin} onOpenRun={openRunDetail} onComposeDatasets={openDatasetMixture} onPrepareGrpoData={prepareGrpoData} />}
         {page === "model-playground" && <ModelPlayground onBack={() => navigatePage("launcher")} initialModelId={new URLSearchParams(window.location.search).get("model_id") || ""} returnRunId={new URLSearchParams(window.location.search).get("run_id") || ""} onOpenRun={openRunDetail} />}
+        {page === "weight-space" && <WeightSpaceWorkbench />}
         {page === "runs" && <Runs onBack={returnToWorkspaceOrigin} onTryModel={tryModel} />}
+        {page === "assistant" && <WorkspaceAssistant onOpenRun={openRunDetail} onOpenData={() => navigatePage("data")} />}
       </div>
       <ArtifactDialog artifact={artifact} onClose={() => setArtifact(null)} />
     </div>

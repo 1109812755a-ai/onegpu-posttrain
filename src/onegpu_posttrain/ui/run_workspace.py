@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 from itertools import islice
 from pathlib import Path
 from typing import Any
@@ -14,6 +15,18 @@ MAX_RECORD_BYTES = 512 * 1024
 MAX_LOG_BYTES = 64 * 1024
 MAX_OUTPUTS = 80
 _PRUNED_DIRS = {"checkpoint", "checkpoints", "merged", "adapters", "model", "models", "__pycache__"}
+
+
+def _safe_failure_reason(value: Any) -> str | None:
+    if not isinstance(value, str) or not value.strip():
+        return None
+    message = " ".join(value.split())
+    message = re.sub(r"(?i)\b(api[_-]?key|access[_-]?token|authorization)\s*[:=]\s*[^\s,;]+", r"\1=[已隐藏]", message)
+    message = re.sub(r"https?://\S+", "[远程地址]", message)
+    message = re.sub(r"\b[A-Za-z]:\\[^\s\"']+", "[本地路径]", message)
+    # Preserve enough of a structured exception to identify the failing layer
+    # and suggested remediation; raw logs remain separately bounded and private.
+    return message[:1200]
 
 
 def _read_json(path: Path, root: Path, limit: int = MAX_RECORD_BYTES) -> dict[str, Any] | None:
@@ -170,8 +183,35 @@ class RunWorkspace:
         return {"runs": rows[offset:offset + limit], "total": total, "limit": limit,
                 "offset": offset, "partial_scan": truncated}
 
-    def run_detail(self, run_id: str) -> dict[str, Any] | None:
-        summary = next((item for item in self._candidates()[0] if item["run_id"] == run_id), None)
+    def run_lineage_from_row(self, run_id: str, row: dict[str, Any]) -> dict[str, Any] | None:
+        """Read only lineage from an already enumerated run, without rescanning handoffs."""
+        if row.get("run_id") != run_id:
+            return None
+        for ref in row.get("source_refs", []):
+            if not isinstance(ref, str):
+                continue
+            base = self.workspace / ref
+            normalized = ref.replace("\\", "/")
+            if normalized.startswith(".onegpu-posttrain/launcher/runs/") or normalized == ".onegpu-posttrain/launcher/runs":
+                state = _read_json(base / f"{run_id}.json", self.workspace, 128 * 1024)
+                output = state.get("output") if state and state.get("run_id") == run_id else None
+                if not isinstance(output, str) or not output:
+                    continue
+                base = self.workspace / output
+            if base.is_symlink() or not base.resolve().is_relative_to(self.workspace):
+                continue
+            for filename in ("lineage.json", "evaluation_lineage.json"):
+                lineage = _read_json(base / filename, self.workspace)
+                if lineage:
+                    return lineage
+        return None
+
+    def run_detail(self, run_id: str, *, _summary: dict[str, Any] | None = None) -> dict[str, Any] | None:
+        # Internal callers may reuse a freshly enumerated workspace row to avoid
+        # rescanning every run for each lineage record in a single query.
+        summary = _summary if _summary is not None and _summary.get("run_id") == run_id else None
+        if summary is None:
+            summary = next((item for item in self._candidates()[0] if item["run_id"] == run_id), None)
         if summary is None:
             return None
         detail = dict(summary)
@@ -199,6 +239,9 @@ class RunWorkspace:
                 record = _read_json(base / filename, self.workspace)
                 if record and record.get("run_id") == run_id:
                     detail["normalized_record"] = record
+                    errors = record.get("errors")
+                    if isinstance(errors, list) and errors and "failure_reason" not in detail:
+                        detail["failure_reason"] = _safe_failure_reason(errors[0])
                     break
             for filename in ("lineage.json", "evaluation_lineage.json"):
                 value = _read_json(base / filename, self.workspace)
@@ -218,6 +261,9 @@ class RunWorkspace:
                     if filename == "resolved_config.json":
                         detail["config"] = value
                     else:
+                        errors = value.get("errors")
+                        if isinstance(errors, list) and errors and "failure_reason" not in detail:
+                            detail["failure_reason"] = _safe_failure_reason(errors[0])
                         detail["metrics"] = value.get("metrics", []) if isinstance(value.get("metrics"), list) else []
                         metric_statuses = value.get("metric_statuses")
                         if isinstance(metric_statuses, dict):

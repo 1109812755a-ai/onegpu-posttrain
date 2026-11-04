@@ -111,9 +111,11 @@ class PromptTemplate(SyntheticModel):
 
 class GenerationRequest(SyntheticModel):
     prompt: str = Field(min_length=1)
+    system_instruction: str | None = Field(default=None, max_length=12000)
     max_output_tokens: int = Field(ge=1)
     temperature: float | None = Field(default=None, ge=0, le=2, allow_inf_nan=False)
     seed: int | None = Field(default=None, ge=0)
+    enable_thinking: bool | None = None
     timeout_seconds: float = Field(default=300, gt=0, allow_inf_nan=False)
     output_protocol: OutputProtocol
 
@@ -201,9 +203,13 @@ class OpenAICompatibleProvider:
         except ImportError as exc:  # pragma: no cover - exercised without synthetic extra
             raise RuntimeError("请安装 onegpu-posttrain[synthetic] 以使用 OpenAI-compatible provider") from exc
 
+        messages = []
+        if request.system_instruction:
+            messages.append({"role": "system", "content": request.system_instruction})
+        messages.append({"role": "user", "content": request.prompt})
         payload: dict[str, Any] = {
             "model": profile.model,
-            "messages": [{"role": "user", "content": request.prompt}],
+            "messages": messages,
             "max_tokens": request.max_output_tokens,
             "response_format": {"type": request.output_protocol.response_format},
         }
@@ -211,6 +217,8 @@ class OpenAICompatibleProvider:
             payload["temperature"] = request.temperature
         if request.seed is not None:
             payload["seed"] = request.seed
+        if request.enable_thinking is not None:
+            payload["enable_thinking"] = request.enable_thinking
 
         try:
             with httpx.Client(transport=self._transport, timeout=request.timeout_seconds) as client:

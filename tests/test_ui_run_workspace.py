@@ -9,6 +9,8 @@ pytest.importorskip("httpx")
 from fastapi.testclient import TestClient
 
 from onegpu_posttrain.ui.run_workspace import MAX_RECORD_BYTES, RunWorkspace
+from onegpu_posttrain.assistant.contracts import EvidenceQuery
+from onegpu_posttrain.assistant.evidence_reader import WorkspaceEvidenceReader
 from onegpu_posttrain.ui.server import create_app
 
 
@@ -169,6 +171,31 @@ def test_run_detail_marks_evaluation_without_scores_and_unresolved_parent(tmp_pa
     assert result["metrics"] == []
     assert result["parent_run_id"] == "run-parent-missing"
     assert result["parent_available"] is False
+
+
+def test_assistant_evaluation_evidence_exposes_sanitized_failure_cause(tmp_path):
+    run_id = "run-base-choice-accuracy-v1-fixture"
+    output = tmp_path / "runs/evaluations" / run_id
+    put(output / "evaluation_run.json", {
+        "run_id": run_id, "status": "failed", "errors": [
+            "ValueError: model type qwen3_5 is not recognized. API_KEY=secret-value "
+            + "Transformers suggested updating the installed package because this model is newer."
+        ],
+    })
+    put(output / "evaluation_lineage.json", {
+        "run_id": run_id, "status": "failed", "lineage_schema_version": "1.0",
+        "protocol_version": "choice-accuracy-v1", "metrics": {},
+    })
+
+    refs = WorkspaceEvidenceReader(tmp_path).search(EvidenceQuery(
+        kind="general", query=run_id, selected_entity_ids=[run_id], limit=1,
+    ))
+    evaluation = next(item for item in refs if item.kind == "evaluation")
+    failure = next(fact for fact in evaluation.facts if fact.key == "failure_reason")
+    assert "qwen3_5" in failure.value
+    assert "secret-value" not in failure.value
+    assert "updating the installed package" in failure.value
+    assert "qwen3_5" in evaluation.summary
 
 
 def test_training_and_evaluation_details_link_only_recorded_parent_and_show_real_denominators(tmp_path):
